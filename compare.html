@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandingkan Mobil - MOBILSECONDMEDAN</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#080C16',
+                            accent: '#D4AF37',
+                            success: '#10B981',
+                            warning: '#F59E0B',
+                            danger: '#EF4444',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
+
+    <!-- Header Container (Rendered by js/app.js) -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-6xl mx-auto px-4 py-16 w-full font-sans">
+        <div class="mb-12 space-y-2">
+            <span class="text-brand-accent font-bold text-xs uppercase tracking-[0.2em]">Analisis Komparasi</span>
+            <h2 class="text-3xl font-extrabold tracking-tight text-slate-900">Bandingkan Unit Pilihan</h2>
+            <p class="text-slate-500 text-xs md:text-sm">Bandingkan spesifikasi teknis dan harga unit mobil secara berdampingan untuk membantu keputusan Anda.</p>
+        </div>
+
+        <!-- Compare Table Container -->
+        <div id="compare-table-container" class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm overflow-x-auto">
+            <div class="text-center py-12 text-slate-400 text-xs font-semibold">Memuat tabel perbandingan...</div>
+        </div>
+    </main>
+
+    <!-- Footer Container (Rendered by js/app.js) -->
+    <div id="footer-container"></div>
+
+    <!-- DB Adaptor & Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        renderHeader("compare");
+        renderFooter();
+
+        async function loadCompareTable() {
+            const container = document.getElementById("compare-table-container");
+            const compareList = CompareManager.get();
+
+            if (compareList.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-20 font-sans">
+                        <span class="text-5xl block animate-bounce">⚖️</span>
+                        <h3 class="font-extrabold text-slate-800 mt-6 mb-2 text-md uppercase tracking-wider">Belum ada unit pembanding</h3>
+                        <p class="text-slate-400 text-xs max-w-xs mx-auto mb-8 font-semibold">Silakan pilih mobil melalui tombol "Bandingkan" pada halaman katalog terlebih dahulu.</p>
+                        <a href="katalog.html" class="premium-btn-primary py-3 text-xs tracking-wider uppercase">
+                            Buka Katalog Unit
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                // Ambil data detail untuk setiap mobil yang ada di bandingkan
+                const detailedCars = [];
+                for (let item of compareList) {
+                    const car = await DB.getCarById(item.id);
+                    if (car) detailedCars.push(car);
+                }
+
+                if (detailedCars.length === 0) {
+                    container.innerHTML = `<div class="text-center py-12 text-brand-danger text-xs font-semibold">Gagal memuat mobil pembanding.</div>`;
+                    return;
+                }
+
+                let headerRow = `<th class="px-5 py-4 font-bold text-slate-400 uppercase text-[10px] tracking-wider text-left bg-slate-50/50 w-1/4">Kriteria</th>`;
+                let imageRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Foto & Nama</td>`;
+                let priceRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Harga OTR</td>`;
+                let yearRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Tahun</td>`;
+                let transRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Transmisi</td>`;
+                let fuelRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Bahan Bakar</td>`;
+                let mileageRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Odometer</td>`;
+                let engineRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Kapasitas Mesin</td>`;
+                let seatRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Kapasitas Kursi</td>`;
+                let colorRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Warna</td>`;
+                let statusRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Status</td>`;
+                let actionRow = `<td class="px-5 py-4 font-bold text-slate-500 bg-slate-50/30 text-xs uppercase tracking-wider">Aksi</td>`;
+
+                detailedCars.forEach((car, index) => {
+                    let statusLabel = `<span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold text-brand-success bg-emerald-50 rounded"><span class="w-1 h-1 rounded-full bg-brand-success pulse-badge"></span> Tersedia</span>`;
+                    if (car.status === "Booking") statusLabel = `<span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold text-brand-warning bg-amber-50 rounded"><span class="w-1 h-1 rounded-full bg-brand-warning"></span> Booking</span>`;
+                    if (car.status === "Terjual") statusLabel = `<span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-bold text-slate-400 bg-slate-100 rounded"><span class="w-1 h-1 rounded-full bg-slate-400"></span> Terjual</span>`;
+
+                    const mainImage = car.images && car.images.length > 0 ? car.images[0] : "https://via.placeholder.com/600x400?text=No+Image";
+
+                    headerRow += `<th class="px-6 py-4 text-slate-800 font-extrabold text-xs uppercase tracking-wider w-1/4">Unit Pembanding ${index + 1}</th>`;
+                    
+                    imageRow += `
+                        <td class="px-6 py-6">
+                            <div class="space-y-3 font-sans">
+                                <img src="${mainImage}" class="w-full h-36 object-cover rounded-xl border border-slate-200 shadow-sm">
+                                <h4 class="font-extrabold text-slate-800 text-sm truncate" title="${car.title}">${car.title}</h4>
+                            </div>
+                        </td>
+                    `;
+                    
+                    priceRow += `<td class="px-6 py-4 text-brand-accent font-black text-base tracking-tight">${formatRupiah(car.price)}</td>`;
+                    yearRow += `<td class="px-6 py-4 text-slate-800 font-bold">${car.year}</td>`;
+                    transRow += `<td class="px-6 py-4 text-slate-600 font-semibold">${car.transmission}</td>`;
+                    fuelRow += `<td class="px-6 py-4 text-slate-600 font-semibold">${car.fuel_type}</td>`;
+                    mileageRow += `<td class="px-6 py-4 text-slate-600 font-semibold">${car.mileage.toLocaleString('id-ID')} km</td>`;
+                    engineRow += `<td class="px-6 py-4 text-slate-600 font-semibold">${car.engine_cc ? car.engine_cc.toLocaleString('id-ID') : "-"} cc</td>`;
+                    seatRow += `<td class="px-6 py-4 text-slate-600 font-semibold">${car.passenger_capacity || 7} Penumpang</td>`;
+                    colorRow += `<td class="px-6 py-4 text-slate-600 font-semibold">${car.color}</td>`;
+                    statusRow += `<td class="px-6 py-4">${statusLabel}</td>`;
+                    
+                    actionRow += `
+                        <td class="px-6 py-6">
+                            <div class="flex flex-col gap-2">
+                                <a href="detail.html?id=${car.id}" class="bg-[#080C16] text-white text-center font-bold text-[10px] uppercase tracking-wider py-2.5 rounded-lg hover:bg-slate-800 transition-colors">
+                                    Detail
+                                </a>
+                                <button onclick="removeFromCompare('${car.id}')" class="border border-red-200 text-red-500 text-center font-bold text-[10px] uppercase tracking-wider py-2.5 rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                                    Hapus
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                });
+
+                container.innerHTML = `
+                    <table class="w-full text-left border-collapse min-w-[700px] border border-slate-200/60 rounded-2xl overflow-hidden font-sans">
+                        <thead>
+                            <tr class="bg-slate-100/50 border-b border-slate-200">
+                                ${headerRow}
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-xs">
+                            <tr class="align-top compare-matrix-row">${imageRow}</tr>
+                            <tr class="font-semibold compare-matrix-row">${priceRow}</tr>
+                            <tr class="compare-matrix-row">${yearRow}</tr>
+                            <tr class="compare-matrix-row">${transRow}</tr>
+                            <tr class="compare-matrix-row">${fuelRow}</tr>
+                            <tr class="compare-matrix-row">${mileageRow}</tr>
+                            <tr class="compare-matrix-row">${engineRow}</tr>
+                            <tr class="compare-matrix-row">${seatRow}</tr>
+                            <tr class="compare-matrix-row">${colorRow}</tr>
+                            <tr class="compare-matrix-row">${statusRow}</tr>
+                            <tr class="compare-matrix-row">${actionRow}</tr>
+                        </tbody>
+                    </table>
+                `;
+
+            } catch (err) {
+                console.error("Gagal memuat tabel perbandingan", err);
+                container.innerHTML = `<div class="text-center py-12 text-brand-danger text-xs font-semibold">Terjadi kesalahan saat memuat data perbandingan.</div>`;
+            }
+        }
+
+        function removeFromCompare(carId) {
+            CompareManager.remove(carId);
+            loadCompareTable();
+        }
+
+        window.addEventListener("DOMContentLoaded", loadCompareTable);
+    </script>
+</body>
+</html>

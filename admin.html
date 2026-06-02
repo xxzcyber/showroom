@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - MOBILSECONDMEDAN</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#080C16',
+                            accent: '#D4AF37',
+                            success: '#10B981',
+                            warning: '#F59E0B',
+                            danger: '#EF4444',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
+
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <!-- Login Area (Hidden if logged in) -->
+    <div id="login-container" class="flex-1 flex items-center justify-center p-4 py-24 font-sans">
+        <div class="bg-white border border-slate-200/60 p-8 rounded-2xl shadow-xl w-full max-w-sm space-y-6">
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 bg-slate-950 text-brand-accent rounded-full flex items-center justify-center font-bold text-xl mx-auto border-2 border-brand-accent/20">M</div>
+                <h3 class="text-lg font-extrabold text-slate-800">Login Administrator</h3>
+                <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Showroom Cangkir Medan</p>
+            </div>
+            
+            <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
+                <div class="space-y-1.5">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Email Admin</label>
+                    <input type="email" id="login-email" required placeholder=""
+                           class="premium-input text-xs font-semibold">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Password</label>
+                    <input type="password" id="login-password" required placeholder=""
+                           class="premium-input text-xs font-semibold">
+                </div>
+                <button type="submit" class="premium-btn-primary w-full py-3.5 text-xs tracking-wider uppercase">
+                    Masuk Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Area (Hidden if not logged in) -->
+    <div id="dashboard-container" class="flex-1 max-w-6xl mx-auto px-4 py-12 w-full hidden font-sans space-y-8 animate-fade-in">
+        <!-- Dashboard Top Header Bar -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm gap-4">
+            <div class="space-y-1.5">
+                <h2 class="text-xl font-extrabold text-slate-800">Dashboard Control Panel</h2>
+                <div class="flex flex-wrap items-center gap-3 text-xs">
+                    <span class="text-slate-500">Akun: <strong class="text-slate-700">ko@mobil.com</strong></span>
+                    <span class="text-slate-300">|</span>
+                    <!-- DB Mode Badge -->
+                    <span id="db-mode-badge" class="bg-brand-accent/15 text-slate-700 px-2.5 py-0.5 rounded font-extrabold text-[10px] border border-brand-accent/20">
+                        Memuat Status Database...
+                    </span>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap gap-2.5">
+                <button onclick="openConfigModal()" class="border border-slate-200 text-slate-700 bg-white font-bold text-[10px] tracking-wider uppercase px-4 py-2.5 rounded-xl hover:bg-slate-50 transition-colors">
+                    ⚙️ Atur Supabase
+                </button>
+                <button onclick="handleLogout()" class="border border-red-100 text-red-500 bg-red-50/50 font-bold text-[10px] tracking-wider uppercase px-4 py-2.5 rounded-xl hover:bg-red-100 hover:text-red-700 transition-colors">
+                    Keluar / Log Out
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard Nav Tabs -->
+        <div class="flex border-b border-slate-200 text-xs font-bold uppercase tracking-wider gap-8">
+            <button onclick="switchTab('cars')" id="tab-btn-cars" class="pb-3 border-b-2 border-brand-accent text-slate-900">
+                🚗 Stok Mobil
+            </button>
+            <button onclick="switchTab('comments')" id="tab-btn-comments" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-600">
+                💬 Moderasi Komentar
+            </button>
+            <button onclick="switchTab('messages')" id="tab-btn-messages" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-600 flex items-center gap-2">
+                ✉️ Inbox Pesan <span id="unread-count" class="bg-red-500 text-white text-[9px] px-1.5 py-0.5 rounded-full font-black hidden">0</span>
+            </button>
+        </div>
+
+        <!-- TAB 1: KELOLA STOK MOBIL -->
+        <div id="tab-content-cars" class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h3 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider">Inventaris Unit Showroom</h3>
+                <button onclick="openCarModal('add')" class="premium-btn-primary py-2.5 px-4 text-xs tracking-wider uppercase">
+                    + Tambah Mobil Baru
+                </button>
+            </div>
+
+            <div class="bg-white border border-slate-200/60 rounded-2xl shadow-sm overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs font-sans">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200">
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-1/12">Foto</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-5/12">Nama Mobil</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-2/12">Harga</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-2/12">Status</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-2/12 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cars-table-body" class="divide-y divide-slate-200/60">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 2: MODERASI KOMENTAR -->
+        <div id="tab-content-comments" class="space-y-6 hidden">
+            <h3 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider">Moderasi Diskusi Publik</h3>
+            
+            <div class="bg-white border border-slate-200/60 rounded-2xl shadow-sm overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs font-sans">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200">
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-2/12">Pengirim</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-3/12">Unit Mobil</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-5/12">Isi Komentar</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-2/12 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comments-table-body" class="divide-y divide-slate-200/60">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 3: INBOX PESAN PRIVAT -->
+        <div id="tab-content-messages" class="space-y-6 hidden">
+            <h3 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider">Inkuiri & Pesan Privat</h3>
+
+            <div class="bg-white border border-slate-200/60 rounded-2xl shadow-sm overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs font-sans">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200">
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-2/12">Pengirim</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-2/12">Unit Ditanyakan</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-5/12">Isi Pesan</th>
+                            <th class="px-6 py-4 font-bold text-slate-400 uppercase tracking-wider w-3/12 text-center">Tindakan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messages-table-body" class="divide-y divide-slate-200/60">
+                        <!-- Populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAR MODAL (Tambah & Edit Mobil) -->
+    <div id="car-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden p-4 overflow-y-auto animate-fade-in font-sans">
+        <div class="bg-white border border-slate-200/60 p-6 rounded-2xl max-w-2xl w-full my-8 relative space-y-4 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <button onclick="closeCarModal()" class="absolute top-4 right-4 text-slate-400 hover:text-black text-xl font-bold">✕</button>
+            <h3 id="car-modal-title" class="font-extrabold text-slate-800 text-sm border-b border-slate-100 pb-3 uppercase tracking-wider">Tambah Unit Mobil</h3>
+            
+            <form id="car-form" class="space-y-4" onsubmit="saveCar(event)">
+                <!-- ID Tersembunyi -->
+                <input type="hidden" id="car-form-id">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-bold text-slate-500">
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Nama / Judul Mobil</label>
+                        <input type="text" id="car-form-title" required placeholder="Contoh: Toyota Avanza 2019 Veloz" class="premium-input font-medium text-slate-800 text-xs">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Harga (Rupiah)</label>
+                        <input type="number" id="car-form-price" required placeholder="Contoh: 175000000" class="premium-input font-medium text-slate-800 text-xs">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Tahun Produksi</label>
+                        <input type="number" id="car-form-year" required placeholder="Contoh: 2019" class="premium-input font-medium text-slate-800 text-xs">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Status Unit</label>
+                        <select id="car-form-status" class="premium-input font-semibold text-slate-800 text-xs cursor-pointer">
+                            <option value="Tersedia">🟢 Tersedia</option>
+                            <option value="Booking">🟡 Booking</option>
+                            <option value="Terjual">🔴 Terjual</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Transmisi</label>
+                        <select id="car-form-trans" class="premium-input font-semibold text-slate-800 text-xs cursor-pointer">
+                            <option value="Manual">Manual</option>
+                            <option value="Matik">Matik</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Bahan Bakar</label>
+                        <select id="car-form-fuel" class="premium-input font-semibold text-slate-800 text-xs cursor-pointer">
+                            <option value="Bensin">Bensin</option>
+                            <option value="Diesel">Diesel</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Jarak Tempuh (Kilometer)</label>
+                        <input type="number" id="car-form-mileage" required placeholder="Contoh: 45000" class="premium-input font-medium text-slate-800 text-xs">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Kapasitas Mesin (cc)</label>
+                        <input type="number" id="car-form-cc" placeholder="Contoh: 1500" class="premium-input font-medium text-slate-800 text-xs">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Kapasitas Penumpang (Kursi)</label>
+                        <input type="number" id="car-form-capacity" value="7" class="premium-input font-medium text-slate-800 text-xs">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block uppercase tracking-wider text-[10px]">Warna Eksterior</label>
+                        <input type="text" id="car-form-color" placeholder="Contoh: Putih Metalik" class="premium-input font-medium text-slate-800 text-xs">
+                    </div>
+                    <div class="space-y-1 md:col-span-2">
+                        <label class="block uppercase tracking-wider text-[10px]">Masa Pajak STNK</label>
+                        <input type="text" id="car-form-tax" placeholder="Contoh: Oktober 2026" class="premium-input font-medium text-slate-800 text-xs">
+                    </div>
+                </div>
+
+                <!-- Input Foto Multi-Angle -->
+                <div class="space-y-1 text-xs font-bold text-slate-500">
+                    <label class="block uppercase tracking-wider text-[10px]">Foto Multi-Angle (URL Gambar, satu per baris - minimal 5-10 baris)</label>
+                    <textarea id="car-form-images" rows="4" required placeholder="Tuliskan URL gambar di sini, satu per baris..."
+                              class="premium-input font-medium text-slate-800 text-xs"></textarea>
+                </div>
+
+                <!-- Deskripsi Lengkap -->
+                <div class="space-y-1 text-xs font-bold text-slate-500">
+                    <label class="block uppercase tracking-wider text-[10px]">Deskripsi / Catatan Tambahan</label>
+                    <textarea id="car-form-description" rows="3" required placeholder="Tuliskan keunggulan mobil, garansi, kondisi fisik, dsb..."
+                              class="premium-input font-medium text-slate-800 text-xs"></textarea>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" onclick="closeCarModal()" class="border border-slate-200 text-slate-700 bg-white font-bold text-xs px-5 py-2.5 rounded-lg hover:bg-slate-50">
+                        Batal
+                    </button>
+                    <button type="submit" class="premium-btn-primary py-2.5 text-xs tracking-wider uppercase">
+                        Simpan Unit Mobil
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONFIG MODAL (Supabase Setup Panel) -->
+    <div id="config-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden p-4 animate-fade-in font-sans">
+        <div class="bg-white border border-slate-200/60 p-6 rounded-2xl max-w-sm w-full relative space-y-4 shadow-2xl">
+            <button onclick="closeConfigModal()" class="absolute top-4 right-4 text-slate-400 hover:text-black text-xl font-bold">✕</button>
+            <h3 class="font-extrabold text-slate-800 text-sm border-b border-slate-100 pb-3 uppercase tracking-wider">⚙️ Atur Supabase Cloud</h3>
+            <p class="text-xs text-slate-500 leading-normal">
+                Hubungkan penyimpanan cloud Supabase dengan mengisi Project URL resmi Anda.
+            </p>
+            
+            <div class="space-y-4">
+                <div class="space-y-1 font-bold text-slate-500 text-xs">
+                    <label class="block uppercase tracking-wider text-[10px]">Supabase Project URL</label>
+                    <input type="text" id="config-url" placeholder="https://xxxxxxxxxxxxxxxxxxxx.supabase.co" 
+                           class="premium-input text-xs font-semibold text-slate-800">
+                </div>
+                <div class="text-[9px] text-slate-400 font-semibold space-y-1.5">
+                    <p>• Dapatkan Project URL Anda di dashboard Supabase (Settings &gt; API &gt; Project URL).</p>
+                    <p>• Publishable Key & Secret Key sudah terkonfigurasi secara bawaan.</p>
+                </div>
+                <div class="flex gap-2 pt-2">
+                    <button onclick="saveSupabaseConfig()" class="flex-1 bg-[#080C16] text-white font-bold text-xs py-2.5 rounded-lg hover:bg-slate-800 transition-colors">
+                        Simpan URL
+                    </button>
+                    <button onclick="resetToLocalConfig()" class="flex-1 border border-red-100 text-red-500 font-bold text-xs py-2.5 rounded-lg hover:bg-red-50 transition-colors">
+                        Reset Local
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- DB Adaptor & Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        renderHeader("admin");
+        renderFooter();
+
+        // Cek autentikasi awal
+        function checkAuth() {
+            const loggedIn = localStorage.getItem("MSM_LOGGED_IN") === "true";
+            const loginSection = document.getElementById("login-container");
+            const dashboardSection = document.getElementById("dashboard-container");
+
+            if (loggedIn) {
+                loginSection.classList.add("hidden");
+                dashboardSection.classList.remove("hidden");
+                
+                // Update badge db mode
+                document.getElementById("db-mode-badge").innerText = `KONEKSI: ${DB.getMode().toUpperCase()}`;
+                
+                loadCarsTable();
+                loadCommentsTable();
+                loadMessagesTable();
+            } else {
+                loginSection.classList.remove("hidden");
+                dashboardSection.classList.add("hidden");
+            }
+        }
+
+        // Login Handler
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById("login-email").value.trim();
+            const password = document.getElementById("login-password").value.trim();
+
+            if (email === "ko@mobil.com" && password === "mobilsecondmedan") {
+                localStorage.setItem("MSM_LOGGED_IN", "true");
+                checkAuth();
+            } else {
+                alert("Email atau password admin salah!");
+            }
+        }
+
+        // Logout Handler
+        function handleLogout() {
+            localStorage.removeItem("MSM_LOGGED_IN");
+            checkAuth();
+        }
+
+        // Atur Supabase Cloud Config Panel
+        function openConfigModal() {
+            document.getElementById("config-url").value = SUPABASE_URL.includes("your-project-ref") ? "" : SUPABASE_URL;
+            document.getElementById("config-modal").classList.remove("hidden");
+        }
+
+        function closeConfigModal() {
+            document.getElementById("config-modal").classList.add("hidden");
+        }
+
+        function saveSupabaseConfig() {
+            const url = document.getElementById("config-url").value.trim();
+            if (!url) {
+                alert("Project URL tidak boleh kosong!");
+                return;
+            }
+            DB.setSupabaseUrl(url);
+        }
+
+        function resetToLocalConfig() {
+            DB.resetToLocal();
+        }
+
+        // Switch Dashboard Tabs
+        function switchTab(tabName) {
+            const tabs = ["cars", "comments", "messages"];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                const content = document.getElementById(`tab-content-${t}`);
+                if (t === tabName) {
+                    btn.className = "pb-3 border-b-2 border-brand-accent text-slate-900 font-bold";
+                    content.classList.remove("hidden");
+                } else {
+                    btn.className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-600 font-bold";
+                    content.classList.add("hidden");
+                }
+            });
+        }
+
+        // ==========================================
+        // MANAJEMEN MOBIL (TAB 1)
+        // ==========================================
+        async function loadCarsTable() {
+            const tbody = document.getElementById("cars-table-body");
+            tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-slate-400">Mengambil data mobil...</td></tr>`;
+
+            try {
+                const cars = await DB.getCars();
+                
+                if (cars.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-slate-400">Tidak ada unit mobil dalam inventaris.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = cars.map(car => {
+                    let badgeHtml = `<span class="inline-flex items-center gap-1.5 px-2 py-1 text-[10px] font-black text-brand-success bg-emerald-50 rounded-lg border border-emerald-100/60"><span class="w-1.5 h-1.5 rounded-full bg-brand-success"></span> TERSEDIA</span>`;
+                    if (car.status === "Booking") {
+                        badgeHtml = `<span class="inline-flex items-center gap-1.5 px-2 py-1 text-[10px] font-black text-brand-warning bg-amber-50 rounded-lg border border-amber-100/60"><span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> BOOKING</span>`;
+                    } else if (car.status === "Terjual") {
+                        badgeHtml = `<span class="inline-flex items-center gap-1.5 px-2 py-1 text-[10px] font-black text-slate-500 bg-slate-100 rounded-lg border border-slate-200/60"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> TERJUAL</span>`;
+                    }
+
+                    const mainImage = car.images && car.images.length > 0 ? car.images[0] : "https://via.placeholder.com/100x70?text=No+Img";
+
+                    return `
+                    <tr class="hover:bg-slate-50/50">
+                        <td class="px-6 py-4">
+                            <img src="${mainImage}" class="w-16 h-12 object-cover rounded-lg border border-slate-200 shadow-sm">
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="font-bold text-slate-800 text-sm truncate max-w-sm">${car.title}</div>
+                            <div class="text-[10px] text-slate-400 mt-0.5">Tahun ${car.year} &bull; ${car.transmission} &bull; ${car.fuel_type}</div>
+                        </td>
+                        <td class="px-6 py-4 font-extrabold text-slate-700 text-xs">
+                            ${formatRupiah(car.price)}
+                        </td>
+                        <td class="px-6 py-4 text-xs font-bold">
+                            ${badgeHtml}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex items-center justify-center gap-2">
+                                <button onclick="openCarModal('edit', '${car.id}')" class="text-slate-600 border border-slate-200 bg-white hover:bg-slate-100 hover:text-black font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors">
+                                    Edit
+                                </button>
+                                <button onclick="deleteCar('${car.id}')" class="text-red-500 border border-red-100 bg-red-50/50 hover:bg-red-100 hover:text-red-700 font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors">
+                                    Hapus
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    `;
+                }).join('');
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-red-500">Gagal memuat data.</td></tr>`;
+            }
+        }
+
+        // Modal Mobil Actions
+        async function openCarModal(mode, id = null) {
+            const form = document.getElementById("car-form");
+            form.reset();
+
+            const title = document.getElementById("car-modal-title");
+            const formId = document.getElementById("car-form-id");
+
+            if (mode === "add") {
+                title.innerText = "Tambah Unit Mobil Baru";
+                formId.value = "";
+                document.getElementById("car-form-status").value = "Tersedia";
+                document.getElementById("car-form-trans").value = "Matik";
+                document.getElementById("car-form-fuel").value = "Bensin";
+                document.getElementById("car-form-capacity").value = "7";
+                document.getElementById("car-form-images").value = "";
+            } else if (mode === "edit" && id) {
+                title.innerText = "Edit Data Unit Mobil";
+                formId.value = id;
+                
+                try {
+                    const car = await DB.getCarById(id);
+                    if (car) {
+                        document.getElementById("car-form-title").value = car.title;
+                        document.getElementById("car-form-price").value = car.price;
+                        document.getElementById("car-form-year").value = car.year;
+                        document.getElementById("car-form-status").value = car.status;
+                        document.getElementById("car-form-trans").value = car.transmission;
+                        document.getElementById("car-form-fuel").value = car.fuel_type;
+                        document.getElementById("car-form-mileage").value = car.mileage;
+                        document.getElementById("car-form-cc").value = car.engine_cc || "";
+                        document.getElementById("car-form-capacity").value = car.passenger_capacity || 7;
+                        document.getElementById("car-form-color").value = car.color || "";
+                        document.getElementById("car-form-tax").value = car.tax_expiration || "";
+                        document.getElementById("car-form-images").value = car.images ? car.images.join('\n') : "";
+                        document.getElementById("car-form-description").value = car.description;
+                    }
+                } catch (err) {
+                    alert("Gagal mengambil data mobil!");
+                    return;
+                }
+            }
+            document.getElementById("car-modal").classList.remove("hidden");
+        }
+
+        function closeCarModal() {
+            document.getElementById("car-modal").classList.add("hidden");
+        }
+
+        // Simpan / Edit Mobil
+        async function saveCar(e) {
+            e.preventDefault();
+            const id = document.getElementById("car-form-id").value;
+
+            // Parsing URL Gambar (Satu per baris)
+            const imagesRaw = document.getElementById("car-form-images").value;
+            const images = imagesRaw.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+
+            if (images.length === 0) {
+                alert("Harap masukkan minimal 1 URL gambar mobil!");
+                return;
+            }
+
+            const carData = {
+                title: document.getElementById("car-form-title").value,
+                price: Number(document.getElementById("car-form-price").value),
+                year: Number(document.getElementById("car-form-year").value),
+                status: document.getElementById("car-form-status").value,
+                transmission: document.getElementById("car-form-trans").value,
+                fuel_type: document.getElementById("car-form-fuel").value,
+                mileage: Number(document.getElementById("car-form-mileage").value),
+                engine_cc: Number(document.getElementById("car-form-cc").value) || null,
+                passenger_capacity: Number(document.getElementById("car-form-capacity").value) || 7,
+                color: document.getElementById("car-form-color").value,
+                tax_expiration: document.getElementById("car-form-tax").value,
+                images: images,
+                description: document.getElementById("car-form-description").value
+            };
+
+            try {
+                if (id) {
+                    await DB.updateCar(id, carData);
+                    alert("Data mobil berhasil diperbarui!");
+                } else {
+                    await DB.addCar(carData);
+                    alert("Mobil baru berhasil ditambahkan!");
+                }
+                closeCarModal();
+                loadCarsTable();
+            } catch (err) {
+                alert("Gagal menyimpan data!");
+            }
+        }
+
+        // Hapus Mobil
+        async function deleteCar(id) {
+            if (confirm("Apakah Anda yakin ingin menghapus mobil ini secara permanen dari basis data?")) {
+                try {
+                    await DB.deleteCar(id);
+                    alert("Mobil berhasil dihapus!");
+                    loadCarsTable();
+                } catch (err) {
+                    alert("Gagal menghapus mobil!");
+                }
+            }
+        }
+
+        // ==========================================
+        // MANAJEMEN KOMENTAR (TAB 2)
+        // ==========================================
+        async function loadCommentsTable() {
+            const tbody = document.getElementById("comments-table-body");
+            tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-slate-400">Mengambil data komentar...</td></tr>`;
+
+            try {
+                const comments = await DB.getAllCommentsAdmin();
+                
+                if (comments.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-slate-400">Tidak ada komentar forum saat ini.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = comments.map(c => `
+                <tr class="hover:bg-slate-50/50">
+                    <td class="px-6 py-4 font-bold text-slate-800 text-[10px] tracking-wide">
+                        ${c.sender_name}<br>
+                        <span class="text-[9px] text-slate-400 font-normal">
+                            ${new Date(c.created_at).toLocaleDateString('id-ID')}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 font-bold text-slate-600 text-xs truncate max-w-xs">
+                        ${c.cars ? c.cars.title : "Mobil Dihapus"}
+                    </td>
+                    <td class="px-6 py-4 text-xs text-slate-500 leading-normal max-w-sm">
+                        ${c.comment_text}
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <button onclick="deleteComment('${c.id}')" class="text-red-500 border border-red-100 bg-red-50/50 hover:bg-red-100 hover:text-red-700 font-bold text-[10px] px-3 py-1.5 rounded-lg transition-colors">
+                            Hapus / Spam
+                        </button>
+                    </td>
+                </tr>
+                `).join('');
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-red-500">Gagal memuat data.</td></tr>`;
+            }
+        }
+
+        async function deleteComment(id) {
+            if (confirm("Hapus komentar publik ini secara permanen?")) {
+                try {
+                    await DB.deleteComment(id);
+                    alert("Komentar terhapus!");
+                    loadCommentsTable();
+                } catch (err) {
+                    alert("Gagal menghapus komentar!");
+                }
+            }
+        }
+
+        // ==========================================
+        // MANAJEMEN PESAN PRIVAT (TAB 3)
+        // ==========================================
+        async function loadMessagesTable() {
+            const tbody = document.getElementById("messages-table-body");
+            tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-slate-400">Mengambil data pesan privat...</td></tr>`;
+
+            try {
+                const messages = await DB.getMessages();
+                
+                // Hitung pesan belum dibaca
+                const unread = messages.filter(m => !m.is_read).length;
+                const badge = document.getElementById("unread-count");
+                if (unread > 0) {
+                    badge.innerText = unread;
+                    badge.classList.remove("hidden");
+                } else {
+                    badge.classList.add("hidden");
+                }
+
+                if (messages.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-slate-400">Tidak ada pesan privat masuk.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = messages.map(m => {
+                    const unreadClass = !m.is_read ? "bg-blue-50/30 font-bold" : "";
+                    const badgeHtml = !m.is_read ? `<span class="bg-blue-600 text-white text-[8px] px-1.5 py-0.5 rounded font-black uppercase shrink-0 tracking-wider">Baru</span>` : "";
+
+                    return `
+                    <tr class="hover:bg-slate-50/50 ${unreadClass}">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-1.5">
+                                ${badgeHtml}
+                                <span class="font-bold text-slate-800 text-xs">${m.sender_name}</span>
+                            </div>
+                            <div class="text-[10px] text-slate-400 mt-0.5">${m.sender_phone}</div>
+                        </td>
+                        <td class="px-6 py-4 font-bold text-slate-600 text-xs truncate max-w-xs">
+                            ${m.cars ? m.cars.title : "Inkuiri Umum"}
+                        </td>
+                        <td class="px-6 py-4 text-xs text-slate-500 leading-normal max-w-sm">
+                            ${m.message_content}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <div class="flex items-center justify-center gap-2">
+                                <button onclick="markRead('${m.id}')" class="text-slate-600 border border-slate-200 bg-white hover:bg-slate-100 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors ${m.is_read ? "pointer-events-none opacity-45" : ""}">
+                                    Tandai Dibaca
+                                </button>
+                                <a href="https://wa.me/${m.sender_phone.replace(/^0/, '62')}?text=${encodeURIComponent(`Halo ${m.sender_name}, saya admin Mobil Second Medan ingin membalas pesan Anda mengenai unit ${m.cars ? m.cars.title : ' showroom'}...`)}" 
+                                   target="_blank" onclick="markReadSilent('${m.id}')"
+                                   class="bg-brand-success text-white font-bold text-[10px] px-2.5 py-1.5 rounded-lg hover:bg-emerald-600 transition-colors">
+                                    Balas WA
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    `;
+                }).join('');
+            } catch (err) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-red-500">Gagal memuat data.</td></tr>`;
+            }
+        }
+
+        async function markRead(id) {
+            try {
+                await DB.markMessageRead(id);
+                loadMessagesTable();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function markReadSilent(id) {
+            try {
+                await DB.markMessageRead(id);
+                setTimeout(loadMessagesTable, 1000);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        checkAuth();
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+# GraphQL Queries untuk Firebase Data Connect
+
+# 1. Mengambil semua data mobil
+query ListCars @auth(level: PUBLIC) {
+  cars(orderBy: [{ createdAt: DESC }]) {
+    id
+    title
+    price
+    year
+    transmission
+    fuelType
+    mileage
+    conditionType
+    status
+    description
+    taxExpiration
+    engineCc
+    passengerCapacity
+    color
+    images
+    createdAt
+  }
+}
+
+# 2. Mengambil satu data mobil berdasarkan ID
+query GetCar($id: UUID!) @auth(level: PUBLIC) {
+  car(id: $id) {
+    id
+    title
+    price
+    year
+    transmission
+    fuelType
+    mileage
+    conditionType
+    status
+    description
+    taxExpiration
+    engineCc
+    passengerCapacity
+    color
+    images
+    createdAt
+  }
+}
+
+# 3. Mengambil komentar yang disetujui untuk mobil tertentu
+query GetComments($carId: UUID!) @auth(level: PUBLIC) {
+  comments(where: { car: { id: { eq: $carId } }, isApproved: { eq: true } }) {
+    id
+    senderName
+    commentText
+    createdAt
+  }
+}
+
+# 4. Mengambil semua komentar untuk admin (beserta info judul mobil)
+query GetAllCommentsAdmin @auth(level: PUBLIC) {
+  comments {
+    id
+    senderName
+    commentText
+    createdAt
+    car {
+      title
+    }
+  }
+}
+
+# 5. Mengambil pesan privat untuk admin
+query GetPrivateMessages @auth(level: PUBLIC) {
+  privateMessages(orderBy: [{ createdAt: DESC }]) {
+    id
+    senderName
+    senderPhone
+    messageContent
+    isRead
+    createdAt
+    car {
+      title
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# Firebase Data Connect Configuration File
+specVersion: "v1alpha"
+serviceId: "mobilsecondmedan"
+schema:
+  source: "schema"
+connectorDirs:
+  - "default-connector"

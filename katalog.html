@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Mobil - MOBILSECONDMEDAN</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#080C16',
+                            accent: '#D4AF37',
+                            success: '#10B981',
+                            warning: '#F59E0B',
+                            danger: '#EF4444',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-900 flex flex-col min-h-screen">
+
+    <!-- Header Container (Rendered by js/app.js) -->
+    <div id="header-container"></div>
+
+    <!-- Catalog Main Section -->
+    <main class="flex-1 max-w-6xl mx-auto px-4 py-16 w-full font-sans">
+        <div class="mb-12 space-y-2">
+            <span class="text-brand-accent font-bold text-xs uppercase tracking-[0.2em]">Temukan Unit Terbaik</span>
+            <h2 class="text-3xl font-extrabold tracking-tight text-slate-900">Katalog Unit Showroom</h2>
+            <p class="text-slate-500 text-xs md:text-sm">Gunakan panel filter untuk menyaring daftar stok mobil sesuai kriteria Anda.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar Filter Panel -->
+            <aside class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm space-y-6 h-fit lg:sticky lg:top-24">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <h3 class="font-bold text-slate-800 flex items-center gap-2 text-xs uppercase tracking-wider">
+                        <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                        Filter Unit
+                    </h3>
+                    <button onclick="resetFilters()" class="text-xs text-slate-400 hover:text-brand-accent font-bold transition-colors">Reset</button>
+                </div>
+
+                <!-- Merek & Model Search -->
+                <div class="space-y-1.5">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Merek & Model</label>
+                    <input type="text" id="search-input" placeholder="Contoh: Avanza, Veloz, Brio..." 
+                           class="premium-input text-xs"
+                           oninput="applyFilters()">
+                </div>
+
+                <!-- Rentang Harga Slider -->
+                <div class="space-y-1.5">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Harga Maksimal</label>
+                    <div class="flex items-center justify-between text-xs font-semibold">
+                        <span class="text-slate-400">50 Jt</span>
+                        <span id="price-val" class="font-extrabold text-brand-accent text-sm">500 Jt</span>
+                    </div>
+                    <input type="range" id="price-input" min="50" max="1000" value="500" 
+                           class="w-full" oninput="updatePriceValue(this.value)">
+                </div>
+
+                <!-- Tahun Produksi -->
+                <div class="space-y-1.5">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tahun Minimum</label>
+                    <input type="number" id="year-input" min="2010" max="2026" placeholder="Contoh: 2018"
+                           class="premium-input text-xs"
+                           onchange="applyFilters()">
+                </div>
+
+                <!-- Transmisi -->
+                <div class="space-y-2">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Transmisi</label>
+                    <div class="flex flex-col gap-2 text-xs">
+                        <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
+                            <input type="radio" name="transmisi-input" value="all" checked onchange="applyFilters()" class="accent-brand-accent"> Semua
+                        </label>
+                        <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
+                            <input type="radio" name="transmisi-input" value="Manual" onchange="applyFilters()" class="accent-brand-accent"> Manual
+                        </label>
+                        <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
+                            <input type="radio" name="transmisi-input" value="Matik" onchange="applyFilters()" class="accent-brand-accent"> Matik (Automatic)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Bahan Bakar -->
+                <div class="space-y-2">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Bahan Bakar</label>
+                    <div class="flex flex-col gap-2 text-xs">
+                        <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
+                            <input type="radio" name="fuel-input" value="all" checked onchange="applyFilters()" class="accent-brand-accent"> Semua
+                        </label>
+                        <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
+                            <input type="radio" name="fuel-input" value="Bensin" onchange="applyFilters()" class="accent-brand-accent"> Bensin
+                        </label>
+                        <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
+                            <input type="radio" name="fuel-input" value="Diesel" onchange="applyFilters()" class="accent-brand-accent"> Diesel
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Jarak Tempuh / Kilometer -->
+                <div class="space-y-1.5">
+                    <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Jarak Tempuh Maksimal</label>
+                    <div class="flex items-center justify-between text-xs font-semibold">
+                        <span class="text-slate-400">5.000 km</span>
+                        <span id="km-val" class="font-extrabold text-brand-accent text-sm">100.000 km</span>
+                    </div>
+                    <input type="range" id="km-input" min="5000" max="150000" step="5000" value="100000" 
+                           class="w-full" oninput="updateKmValue(this.value)">
+                </div>
+            </aside>
+
+            <!-- Catalog Listings Area -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Sorting & Top Bar -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-white border border-slate-200/60 px-6 py-4 rounded-2xl shadow-sm gap-4">
+                    <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">
+                        Menampilkan <span id="cars-count" class="font-black text-slate-800 text-sm">0</span> Unit Pilihan
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0">Urutan:</label>
+                        <select id="sort-select" class="bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold px-3 py-2 focus:outline-none focus:border-brand-accent cursor-pointer"
+                                onchange="applyFilters()">
+                            <option value="rekomendasi">Rekomendasi</option>
+                            <option value="harga-asc">Harga Terendah</option>
+                            <option value="harga-desc">Harga Tertinggi</option>
+                            <option value="tahun-desc">Tahun Terbaru</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Cars Grid -->
+                <div id="cars-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Loading Placeholder -->
+                    <div class="text-center col-span-2 py-12 text-slate-400 text-xs">Memuat katalog mobil...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Container (Rendered by js/app.js) -->
+    <div id="footer-container"></div>
+
+    <!-- Supabase JS Client & Global Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        renderHeader("katalog");
+        renderFooter();
+
+        let allCars = [];
+
+        async function loadCatalog() {
+            try {
+                allCars = await DB.getCars();
+                applyFilters();
+            } catch (err) {
+                console.error("Gagal mengambil data katalog", err);
+                document.getElementById("cars-grid").innerHTML = `<div class="col-span-2 text-center py-12 text-brand-danger text-xs font-semibold">Gagal memuat katalog. Coba periksa koneksi database.</div>`;
+            }
+        }
+
+        // Update Slider UI Labels
+        function updatePriceValue(val) {
+            document.getElementById("price-val").innerText = val === "1000" ? "Semua Harga" : `${val} Jt`;
+            applyFilters();
+        }
+
+        function updateKmValue(val) {
+            document.getElementById("km-val").innerText = val === "150000" ? "Semua KM" : `${Number(val).toLocaleString('id-ID')} km`;
+            applyFilters();
+        }
+
+        // Reset Filter
+        function resetFilters() {
+            document.getElementById("search-input").value = "";
+            document.getElementById("price-input").value = "500";
+            document.getElementById("price-val").innerText = "500 Jt";
+            document.getElementById("year-input").value = "";
+            document.getElementById("km-input").value = "100000";
+            document.getElementById("km-val").innerText = "100.000 km";
+            
+            // Reset Radios
+            document.querySelector('input[name="transmisi-input"][value="all"]').checked = true;
+            document.querySelector('input[name="fuel-input"][value="all"]').checked = true;
+            
+            applyFilters();
+        }
+
+        // Filter engine
+        function applyFilters() {
+            const search = document.getElementById("search-input").value.toLowerCase().trim();
+            const maxPrice = Number(document.getElementById("price-input").value) * 1000000;
+            const minYear = Number(document.getElementById("year-input").value) || 0;
+            const maxKm = Number(document.getElementById("km-input").value);
+            
+            const trans = document.querySelector('input[name="transmisi-input"]:checked').value;
+            const fuel = document.querySelector('input[name="fuel-input"]:checked').value;
+            
+            let filtered = allCars.filter(car => {
+                // Search term
+                if (search && !car.title.toLowerCase().includes(search)) return false;
+                
+                // Max Price
+                if (document.getElementById("price-input").value !== "1000" && car.price > maxPrice) return false;
+                
+                // Min Year
+                if (minYear && car.year < minYear) return false;
+                
+                // Transmisi
+                if (trans !== "all" && car.transmission !== trans) return false;
+                
+                // Fuel
+                if (fuel !== "all" && car.fuel_type !== fuel) return false;
+                
+                // Max KM
+                if (document.getElementById("km-input").value !== "150000" && car.mileage > maxKm) return false;
+                
+                return true;
+            });
+
+            // Sorting
+            const sort = document.getElementById("sort-select").value;
+            if (sort === "harga-asc") {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sort === "harga-desc") {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sort === "tahun-desc") {
+                filtered.sort((a, b) => b.year - a.year);
+            }
+
+            renderGrid(filtered);
+        }
+
+        function renderGrid(cars) {
+            const grid = document.getElementById("cars-grid");
+            const countSpan = document.getElementById("cars-count");
+            
+            countSpan.innerText = cars.length;
+
+            if (cars.length === 0) {
+                grid.innerHTML = `
+                <div class="col-span-2 text-center py-16 bg-white border border-slate-200/60 rounded-2xl">
+                    <p class="text-slate-400 text-xs font-semibold">Tidak ada unit mobil yang sesuai dengan kriteria filter Anda.</p>
+                </div>`;
+                return;
+            }
+
+            grid.innerHTML = cars.map(car => {
+                let statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-success text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-success pulse-badge"></span> TERSEDIA
+                </span>`;
+                if (car.status === "Booking") {
+                    statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-warning text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> BOOKING
+                    </span>`;
+                } else if (car.status === "Terjual") {
+                    statusBadge = `<span class="absolute top-4 left-4 bg-[#080C16]/90 backdrop-blur-md text-white/90 text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-800 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-danger"></span> TERJUAL
+                    </span>`;
+                }
+
+                const mainImage = car.images && car.images.length > 0 ? car.images[0] : "https://via.placeholder.com/600x400?text=No+Image";
+
+                return `
+                <div class="premium-card overflow-hidden flex flex-col group border border-slate-200/50">
+                    <div class="relative overflow-hidden aspect-[4/3] bg-slate-100">
+                        <img src="${mainImage}" alt="${car.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                        ${statusBadge}
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">
+                                <span>Tahun ${car.year}</span>
+                                <span>&bull;</span>
+                                <span>${car.transmission}</span>
+                                <span>&bull;</span>
+                                <span>${car.fuel_type}</span>
+                            </div>
+                            <h4 class="font-extrabold text-slate-800 text-lg group-hover:text-brand-accent transition-colors truncate">
+                                <a href="detail.html?id=${car.id}">${car.title}</a>
+                            </h4>
+                            <div class="text-brand-accent font-black text-xl mt-2 tracking-tight">
+                                ${formatRupiah(car.price)}
+                            </div>
+                            <div class="flex justify-between items-center text-xs text-slate-500 border-t border-slate-100 pt-3 mt-4">
+                                <span>Odometer: <strong class="text-slate-800">${car.mileage.toLocaleString('id-ID')} km</strong></span>
+                                <span class="font-semibold text-slate-600 text-[10px] uppercase tracking-wider">Showroom Cangkir</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <a href="detail.html?id=${car.id}" class="bg-[#080C16] text-white text-center font-bold text-xs py-3 rounded-lg hover:bg-slate-800 transition-colors uppercase tracking-wider">
+                                Detail Unit
+                            </a>
+                            <button onclick="CompareManager.add('${car.id}', '${car.title}', ${car.price}, '${mainImage}')" class="border border-slate-300 text-slate-700 text-center font-bold text-xs py-3 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition-colors uppercase tracking-wider">
+                                ⚖️ Bandingkan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        loadCatalog();
+    </script>
+</body>
+</html>

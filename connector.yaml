@@ -1,0 +1,6 @@
+# Firebase Data Connect Connector Configuration
+connectorId: "default"
+generate:
+  javascriptSdk:
+    outputDir: "../../js/generated-sdk"
+    package: "@mobilsecondmedan/dataconnect"

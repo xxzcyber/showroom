@@ -1,0 +1,111 @@
+# GraphQL Mutations untuk Firebase Data Connect
+
+# 1. Menambahkan mobil baru
+mutation CreateCar(
+  $title: String!
+  $price: Int64!
+  $year: Int!
+  $transmission: String!
+  $fuelType: String!
+  $mileage: Int!
+  $conditionType: String!
+  $status: String!
+  $description: String!
+  $taxExpiration: String
+  $engineCc: Int!
+  $passengerCapacity: Int!
+  $color: String!
+  $images: [String!]!
+) @auth(level: PUBLIC) {
+  car_insert(data: {
+    title: $title
+    price: $price
+    year: $year
+    transmission: $transmission
+    fuelType: $fuelType
+    mileage: $mileage
+    conditionType: $conditionType
+    status: $status
+    description: $description
+    taxExpiration: $taxExpiration
+    engineCc: $engineCc
+    passengerCapacity: $passengerCapacity
+    color: $color
+    images: $images
+  })
+}
+
+# 2. Mengedit data mobil
+mutation UpdateCar(
+  $id: UUID!
+  $title: String
+  $price: Int64
+  $year: Int
+  $transmission: String
+  $fuelType: String
+  $mileage: Int
+  $status: String
+  $description: String
+  $taxExpiration: String
+  $engineCc: Int
+  $passengerCapacity: Int
+  $color: String
+  $images: [String!]
+) @auth(level: PUBLIC) {
+  car_update(id: $id, data: {
+    title: $title
+    price: $price
+    year: $year
+    transmission: $transmission
+    fuelType: $fuelType
+    mileage: $mileage
+    status: $status
+    description: $description
+    taxExpiration: $taxExpiration
+    engineCc: $engineCc
+    passengerCapacity: $passengerCapacity
+    color: $color
+    images: $images
+  })
+}
+
+# 3. Menghapus data mobil
+mutation DeleteCar($id: UUID!) @auth(level: PUBLIC) {
+  car_delete(id: $id)
+}
+
+# 4. Menambahkan komentar baru
+mutation CreateComment($carId: UUID!, $senderName: String!, $commentText: String!) @auth(level: PUBLIC) {
+  comment_insert(data: {
+    carId: $carId
+    senderName: $senderName
+    commentText: $commentText
+    isApproved: true
+  })
+}
+
+# 5. Menghapus komentar
+mutation DeleteComment($id: UUID!) @auth(level: PUBLIC) {
+  comment_delete(id: $id)
+}
+
+# 6. Mengirim pesan privat baru
+mutation CreatePrivateMessage(
+  $carId: UUID
+  $senderName: String!
+  $senderPhone: String!
+  $messageContent: String!
+) @auth(level: PUBLIC) {
+  privateMessage_insert(data: {
+    carId: $carId
+    senderName: $senderName
+    senderPhone: $senderPhone
+    messageContent: $messageContent
+    isRead: false
+  })
+}
+
+# 7. Menandai pesan sebagai dibaca
+mutation MarkMessageRead($id: UUID!) @auth(level: PUBLIC) {
+  privateMessage_update(id: $id, data: { isRead: true })
+}

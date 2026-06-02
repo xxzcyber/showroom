@@ -1,0 +1,41 @@
+# Schema untuk Firebase Data Connect (PostgreSQL)
+# File ini mendefinisikan tabel dan relasi yang akan dibuat di Google Cloud SQL.
+
+type Car @table {
+  id: UUID! @default(expr: "uuid_generate_v4()")
+  title: String!
+  price: Int64!
+  year: Int!
+  transmission: String! # Manual / Matik
+  fuelType: String! # Bensin / Diesel / Listrik / Hybrid
+  mileage: Int!
+  conditionType: String! @default(value: "Bekas")
+  status: String! @default(value: "Tersedia") # Tersedia / Booking / Terjual
+  description: String!
+  taxExpiration: String
+  engineCc: Int!
+  passengerCapacity: Int! @default(value: 7)
+  color: String!
+  images: [String!]!
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type Comment @table {
+  id: UUID! @default(expr: "uuid_generate_v4()")
+  car: Car!
+  senderName: String!
+  commentText: String!
+  isApproved: Boolean! @default(value: true)
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+type PrivateMessage @table {
+  id: UUID! @default(expr: "uuid_generate_v4()")
+  car: Car # Hubungkan ke mobil jika ada inkuiri unit tertentu
+  senderName: String!
+  senderPhone: String!
+  messageContent: String!
+  isRead: Boolean! @default(value: false)
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+```
