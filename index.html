@@ -12,8 +12,9 @@
                 extend: {
                     colors: {
                         brand: {
-                            primary: '#080C16',
-                            accent: '#D4AF37',
+                            primary: '#0F172A',
+                            accent: '#FFC800',
+                            accentHover: '#E6B400',
                             success: '#10B981',
                             warning: '#F59E0B',
                             danger: '#EF4444',
@@ -31,99 +32,202 @@
     <!-- Header Container (Rendered by js/app.js) -->
     <div id="header-container"></div>
 
-    <!-- Hero Section (Premium Glass/Midnight Style) -->
-    <section class="hero-gradient text-white py-24 px-4 relative">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(212,175,55,0.08),transparent_50%)] pointer-events-none"></div>
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
-            <div class="space-y-8 animate-fade-in">
-                <span class="inline-flex items-center gap-2 bg-yellow-500/10 text-brand-accent border border-brand-accent/30 text-[10px] px-3.5 py-1.5 rounded-full font-bold uppercase tracking-widest">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span> Showroom Mobil Bekas Premium Medan
+    <!-- Hero Section (Premium light gradient with solid Carsome search card) -->
+    <section class="hero-gradient text-white py-20 px-4 relative">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,200,0,0.08),transparent_50%)] pointer-events-none"></div>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 items-center relative z-10">
+            <!-- Left Headline text (2 cols) -->
+            <div class="lg:col-span-3 space-y-6 animate-fade-in">
+                <span class="inline-flex items-center gap-1.5 bg-white/10 text-brand-accent border border-brand-accent/20 text-[9px] px-3.5 py-1.5 rounded-full font-bold uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span> Showroom Cangkir Medan
                 </span>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
-                    Pilihan Mobil Bekas <span class="gold-gradient">Berkualitas Tinggi</span>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
+                    Beli Mobil Bekas Aman <br><span class="text-brand-accent">& Bergaransi Penuh</span>
                 </h2>
-                <p class="text-slate-300 text-sm md:text-base leading-relaxed max-w-lg">
-                    Showroom Mobil Second Medan menyajikan pilihan mobil bekas berkelas yang telah melalui inspeksi ketat. Bebas tabrak, bebas banjir, dengan kelengkapan surat terjamin 100%. Siap COD Medan & sekitarnya.
+                <p class="text-slate-300 text-xs md:text-sm leading-relaxed max-w-lg">
+                    Showroom Mobil Second Medan menyajikan pilihan mobil bekas terkurasi wilayah Medan, Binjai, Deli Serdang. Dapatkan garansi 1 tahun serta sertifikasi bebas tabrakan/banjir.
                 </p>
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="katalog.html" class="premium-btn-primary">
-                        Lihat Katalog Mobil
-                    </a>
-                    <a href="https://www.instagram.com/mobilsecondmedan/" target="_blank" class="premium-btn-secondary">
-                        <svg class="w-4 h-4 text-brand-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                        Ikuti Instagram
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <a href="https://www.tiktok.com/@mobilsecond.medan" target="_blank" class="premium-btn-primary text-xs uppercase tracking-wider">
+                        📷 Review Unit di TikTok
                     </a>
                 </div>
             </div>
-            <div class="relative flex justify-center animate-fade-in" style="animation-delay: 0.2s;">
-                <!-- Main Header Image / TikTok link -->
-                <a href="https://www.tiktok.com/@mobilsecond.medan" target="_blank" class="block relative group overflow-hidden rounded-2xl border border-white/10 shadow-2xl transition-all duration-300 hover:border-brand-accent max-w-sm w-full">
-                    <img src="images/owner.png" alt="Mobil Second Medan Owner" class="w-full h-96 object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-6">
-                        <span class="bg-red-600 text-white text-[9px] px-2 py-0.5 rounded font-bold w-max mb-2 tracking-widest uppercase">TIKTOK REVIEW</span>
-                        <h3 class="text-white text-md font-bold">Kunjungi TikTok Kami</h3>
-                        <p class="text-xs text-slate-300">Tonton review detail unit Confero, Avanza, & tips pembelian</p>
+            
+            <!-- Right Search Widget Card (2 cols) -->
+            <div class="lg:col-span-2 animate-fade-in" style="animation-delay: 0.15s;">
+                <div class="bg-white border border-slate-200/60 p-6 rounded-xl shadow-xl text-slate-800 space-y-4">
+                    <div class="border-b border-slate-100 pb-2">
+                        <h3 class="font-bold text-xs uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                            🔎 Cari Mobil Bekas Terbaik
+                        </h3>
                     </div>
-                </a>
-                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-accent/10 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <form id="hero-search-form" class="space-y-4" onsubmit="executeHeroSearch(event)">
+                        <!-- Search input -->
+                        <div class="space-y-1">
+                            <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider">Merek atau Model</label>
+                            <input type="text" id="hero-search-input" placeholder="Contoh: Avanza, Innova, Brio..." 
+                                   class="premium-input text-xs font-semibold py-2.5">
+                        </div>
+
+                        <!-- Budget selector -->
+                        <div class="space-y-1">
+                            <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider">Maksimal Budget</label>
+                            <select id="hero-search-price" class="premium-input text-xs font-semibold py-2.5 cursor-pointer">
+                                <option value="1000">Tampilkan Semua Harga</option>
+                                <option value="150">Di bawah 150 Juta</option>
+                                <option value="200">Di bawah 200 Juta</option>
+                                <option value="300">Di bawah 300 Juta</option>
+                            </select>
+                        </div>
+
+                        <!-- Transmission -->
+                        <div class="space-y-1">
+                            <label class="block text-[9px] font-bold text-slate-400 uppercase tracking-wider">Transmisi</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <label class="border border-slate-200 hover:border-brand-primary p-2.5 rounded-lg flex items-center justify-center gap-1.5 text-xs font-bold text-slate-600 cursor-pointer">
+                                    <input type="radio" name="hero-search-trans" value="all" checked class="accent-brand-primary"> Semua
+                                </label>
+                                <label class="border border-slate-200 hover:border-brand-primary p-2.5 rounded-lg flex items-center justify-center gap-1.5 text-xs font-bold text-slate-600 cursor-pointer">
+                                    <input type="radio" name="hero-search-trans" value="Manual" class="accent-brand-primary"> Manual
+                                </label>
+                                <label class="border border-slate-200 hover:border-brand-primary p-2.5 rounded-lg flex items-center justify-center gap-1.5 text-xs font-bold text-slate-600 cursor-pointer">
+                                    <input type="radio" name="hero-search-trans" value="Matik" class="accent-brand-primary"> Matik
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="w-full bg-brand-primary text-white font-bold py-3 rounded-lg hover:bg-slate-800 transition-colors uppercase tracking-wider text-xs shadow-md">
+                            Cari 5 Unit Tersedia
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Jaminan Rasa Aman (Trust Elements Section) -->
-    <section class="py-20 bg-white border-b border-slate-200/50">
+    <!-- Inspection Trust Elements (Caroline / Carsome checklist style) -->
+    <section class="py-12 bg-white border-b border-slate-200/50">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 font-sans">
+            <div class="flex items-center gap-3">
+                <!-- Check Icon -->
+                <div class="w-10 h-10 bg-emerald-50 text-brand-success rounded-full flex items-center justify-center border border-emerald-100 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Lolos 175 Titik Inspeksi</h4>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Sertifikasi kelayakan sasis & bodi</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-50 text-brand-success rounded-full flex items-center justify-center border border-emerald-100 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Garansi Mesin 1 Tahun</h4>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Jaminan ketahanan komponen vital</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-50 text-brand-success rounded-full flex items-center justify-center border border-emerald-100 shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 text-xs uppercase tracking-wider">Garansi Bebas Banjir/Tabrak</h4>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Unit terjamin bebas kecelakaan besar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Quick Search Section (Carsome & Oto.com style) -->
+    <section class="py-12 bg-white border-b border-slate-200/50">
         <div class="max-w-6xl mx-auto px-4">
-            <h3 class="text-center text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] mb-12">Mengapa Memilih Mobil Second Medan?</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="flex items-start gap-4 p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-brand-accent/20 transition-all duration-300">
-                    <div class="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center shrink-0 border border-red-100">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            <div class="text-center mb-8">
+                <span class="text-brand-primary font-bold text-xs uppercase tracking-[0.2em]">Cari Berdasarkan Merek</span>
+                <h3 class="text-2xl font-black tracking-tight text-slate-900 mt-1">Pilih Merek Mobil Populer</h3>
+            </div>
+            
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+                <!-- Toyota -->
+                <div onclick="window.location.href='katalog.html?brand=Toyota'" class="brand-btn group">
+                    <div class="brand-btn-logo group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-slate-800" viewBox="0 0 100 100" fill="currentColor">
+                            <path d="M 50 15 C 22.4 15 0 26.2 0 40 C 0 53.8 22.4 65 50 65 C 77.6 65 100 53.8 100 40 C 100 26.2 77.6 15 50 15 Z M 50 20 C 74.8 20 95 29 95 40 C 95 51 74.8 60 50 60 C 25.2 60 5 51 5 40 C 5 29 25.2 20 5 20 Z" />
+                            <path d="M 50 22 C 37.8 22 28 32.7 28 46 C 28 59.3 37.8 70 50 70 C 62.2 70 72 59.3 72 46 C 72 32.7 62.2 22 50 22 Z M 50 27 C 59.4 27 67 35.5 67 46 C 67 56.5 59.4 65 50 65 C 40.6 65 33 56.5 33 46 C 33 35.5 40.6 27 50 27 Z" />
+                            <path d="M 50 34 C 41.7 34 35 37.8 35 42.5 C 35 47.2 41.7 51 50 51 C 58.3 51 65 47.2 65 42.5 C 65 37.8 58.3 34 50 34 Z M 50 39 C 55.5 39 60 40.6 60 42.5 C 60 44.4 55.5 46 50 46 C 44.5 46 40 44.4 40 42.5 C 40 40.6 44.5 39 50 39 Z" />
                         </svg>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wide">Bukan Bekas Tabrak / Banjir</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Seluruh stok unit kami telah melalui inspeksi struktur bodi secara mendalam untuk menjamin kenyamanan berkendara Anda.</p>
-                    </div>
+                    <span class="text-xs font-bold text-slate-700 group-hover:text-slate-900 transition-colors">Toyota</span>
                 </div>
-                <!-- Card 2 -->
-                <div class="flex items-start gap-4 p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-brand-accent/20 transition-all duration-300">
-                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center shrink-0 border border-emerald-100">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                <!-- Honda -->
+                <div onclick="window.location.href='katalog.html?brand=Honda'" class="brand-btn group">
+                    <div class="brand-btn-logo group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="15" y="15" width="70" height="70" rx="12" />
+                            <path d="M 33 27 L 33 73 M 67 27 L 67 73 M 33 50 L 67 50" />
                         </svg>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wide">Dokumen Asli Lengkap</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Jaminan 100% legalitas dokumen kendaraan. Setiap unit disertai STNK, BPKB, dan Faktur pembelian asli yang sah secara hukum.</p>
-                    </div>
+                    <span class="text-xs font-bold text-slate-700 group-hover:text-slate-900 transition-colors">Honda</span>
                 </div>
-                <!-- Card 3 -->
-                <div class="flex items-start gap-4 p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-brand-accent/20 transition-all duration-300">
-                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shrink-0 border border-blue-100">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                <!-- Mitsubishi -->
+                <div onclick="window.location.href='katalog.html?brand=Mitsubishi'" class="brand-btn group">
+                    <div class="brand-btn-logo group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-red-600" viewBox="0 0 100 100" fill="currentColor">
+                            <polygon points="50,15 62,36 50,57 38,36" />
+                            <polygon points="50,57 38,36 15,49 27,70" />
+                            <polygon points="50,57 62,36 85,49 73,70" />
                         </svg>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-slate-800 text-sm mb-1.5 uppercase tracking-wide">Bebas Bawa Inspektur</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">Kami menjamin keterbukaan penuh. Anda dipersilakan membawa mekanik pribadi atau memanggil inspektur independen sebelum membeli.</p>
+                    <span class="text-xs font-bold text-slate-700 group-hover:text-slate-900 transition-colors">Mitsubishi</span>
+                </div>
+                <!-- Daihatsu -->
+                <div onclick="window.location.href='katalog.html?brand=Daihatsu'" class="brand-btn group">
+                    <div class="brand-btn-logo group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-slate-800" viewBox="0 0 100 100" fill="currentColor">
+                            <path d="M 50,15 C 28,15 10,26 10,40 C 10,54 28,65 50,65 C 72,65 90,54 90,40 C 90,26 72,15 50,15 Z M 50,20 C 69,20 85,29 85,40 C 85,51 69,60 50,60 C 31,60 15,51 15,40 C 15,29 31,20 50,20 Z" />
+                            <path d="M 30,28 L 52,28 C 65,28 72,34 72,40 C 72,46 65,52 52,52 L 40,52 L 35,46 L 48,46 C 55,46 58,44 58,40 C 58,36 55,34 48,34 L 35,34 Z" />
+                        </svg>
                     </div>
+                    <span class="text-xs font-bold text-slate-700 group-hover:text-slate-900 transition-colors">Daihatsu</span>
+                </div>
+                <!-- Suzuki -->
+                <div onclick="window.location.href='katalog.html?brand=Suzuki'" class="brand-btn group">
+                    <div class="brand-btn-logo group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-red-600" viewBox="0 0 100 100" fill="currentColor">
+                            <path d="M 75,18 L 41,18 L 25,40 L 57,40 C 66,40 68,48 57,48 L 25,48 L 25,82 L 59,82 L 75,60 L 43,60 C 34,60 32,52 43,52 L 75,52 Z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-bold text-slate-700 group-hover:text-slate-900 transition-colors">Suzuki</span>
+                </div>
+                <!-- Wuling -->
+                <div onclick="window.location.href='katalog.html?brand=Wuling'" class="brand-btn group">
+                    <div class="brand-btn-logo group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 text-red-600" viewBox="0 0 100 100" fill="currentColor">
+                            <polygon points="50,40 58,52 50,64 42,52" />
+                            <polygon points="36,46 45,39 42,51 33,58" />
+                            <polygon points="64,46 55,39 58,51 67,58" />
+                            <polygon points="22,52 31,45 28,57 19,64" />
+                            <polygon points="78,52 69,45 72,57 81,64" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-bold text-slate-700 group-hover:text-slate-900 transition-colors">Wuling</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Latest Listings Section -->
-    <section class="py-24 px-4 max-w-6xl mx-auto w-full">
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-16 gap-6">
+    <section class="py-20 px-4 max-w-6xl mx-auto w-full">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
             <div>
-                <span class="text-brand-accent font-bold text-xs uppercase tracking-[0.2em]">Katalog Terbaru</span>
-                <h3 class="text-3xl font-extrabold tracking-tight mt-1 text-slate-900">Unit Ready Stock Showroom</h3>
+                <span class="text-brand-primary font-bold text-xs uppercase tracking-[0.25em]">Unit Unggulan</span>
+                <h3 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900 mt-1">Mobil Pilihan Hari Ini</h3>
             </div>
-            <a href="katalog.html" class="text-xs font-bold text-slate-700 hover:text-brand-accent transition-colors flex items-center gap-1 uppercase tracking-wider border-b-2 border-slate-200 hover:border-brand-accent pb-1">
-                Lihat Seluruh Katalog Unit &rarr;
+            <a href="katalog.html" class="text-xs font-bold text-slate-700 hover:text-brand-accent transition-colors flex items-center gap-1.5 uppercase tracking-wider border-b-2 border-slate-200 pb-1">
+                Lihat Semua Katalog Unit &rarr;
             </a>
         </div>
 
@@ -133,126 +237,76 @@
         </div>
     </section>
 
-    <!-- Testimonials Section (Premium Deep Dark) -->
-    <section class="py-24 bg-[#080C16] text-white px-4 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(212,175,55,0.06),transparent_50%)] pointer-events-none"></div>
-        <div class="max-w-6xl mx-auto relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-20 space-y-3">
-                <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Dokumentasi Pembelian</span>
-                <h3 class="text-3xl font-extrabold tracking-tight text-white">Senyum Kepuasan Pelanggan</h3>
-                <p class="text-slate-400 text-xs leading-relaxed">Bukti nyata dedikasi kami dalam menghadirkan unit berkualitas terbaik untuk wilayah Medan dan sekitarnya.</p>
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-slate-950 text-white px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-2">
+                <span class="text-brand-accent text-xs font-bold uppercase tracking-[0.2em]">Kualitas Terjamin</span>
+                <h3 class="text-2xl md:text-3xl font-black tracking-tight">Pelanggan yang Puas</h3>
+                <p class="text-slate-400 text-xs">Ulasan nyata pembeli mobil bekas di Showroom Cangkir Medan.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Testi 1 -->
-                <div class="bg-[#121829] border border-slate-900 p-6 rounded-2xl space-y-5">
-                    <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=400" alt="Serah terima unit" class="w-full h-52 object-cover rounded-xl border border-slate-800">
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-4">
+                    <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&q=80&w=400" alt="Serah terima unit" class="w-full h-48 object-cover rounded-lg border border-slate-800">
                     <div class="flex text-brand-accent text-xs">★★★★★</div>
-                    <p class="text-xs text-slate-300 italic leading-relaxed">"Wendy sangat kooperatif. Saya dipersilakan membawa inspektur mekanik independen untuk memeriksa seluruh bagian mobil Avanza. Sangat puas dengan keterbukaannya."</p>
-                    <div class="border-t border-slate-800/80 pt-4 flex items-center justify-between">
-                        <div>
-                            <h4 class="font-bold text-xs text-white uppercase tracking-wide">Rian Gumilang</h4>
-                            <p class="text-[10px] text-slate-400 mt-0.5">Toyota Avanza (Medan Johor)</p>
-                        </div>
+                    <p class="text-xs text-slate-300 italic">"Penjual sangat kooperatif. Saya dipersilakan membawa inspektur mekanik independen untuk memeriksa seluruh bagian mobil Avanza. Sangat puas dengan keterbukaannya."</p>
+                    <div class="border-t border-slate-800 pt-3">
+                        <h4 class="font-bold text-xs text-white">Rian Gumilang</h4>
+                        <p class="text-[10px] text-brand-accent">Toyota Avanza (Medan Johor)</p>
                     </div>
                 </div>
                 <!-- Testi 2 -->
-                <div class="bg-[#121829] border border-slate-900 p-6 rounded-2xl space-y-5">
-                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=400" alt="Serah terima unit" class="w-full h-52 object-cover rounded-xl border border-slate-800">
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-4">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=400" alt="Serah terima unit" class="w-full h-48 object-cover rounded-lg border border-slate-800">
                     <div class="flex text-brand-accent text-xs">★★★★★</div>
-                    <p class="text-xs text-slate-300 italic leading-relaxed">"Membeli Innova Diesel di sini sangat mulus. Semua penjelasan mengenai spesifikasi mesin sangat rinci, dan surat kendaraan lengkap diserahkan seketika."</p>
-                    <div class="border-t border-slate-800/80 pt-4 flex items-center justify-between">
-                        <div>
-                            <h4 class="font-bold text-xs text-white uppercase tracking-wide">dr. Amelia Sembiring</h4>
-                            <p class="text-[10px] text-slate-400 mt-0.5">Toyota Innova (Medan Baru)</p>
-                        </div>
+                    <p class="text-xs text-slate-300 italic">"Membeli Innova Diesel di sini sangat mulus. Semua penjelasan mengenai spesifikasi mesin sangat rinci, dan surat kendaraan lengkap diserahkan seketika."</p>
+                    <div class="border-t border-slate-800 pt-3">
+                        <h4 class="font-bold text-xs text-white">dr. Amelia Sembiring</h4>
+                        <p class="text-[10px] text-brand-accent">Toyota Innova (Medan Baru)</p>
                     </div>
                 </div>
                 <!-- Testi 3 -->
-                <div class="bg-[#121829] border border-slate-900 p-6 rounded-2xl space-y-5">
-                    <img src="https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&q=80&w=400" alt="Serah terima unit" class="w-full h-52 object-cover rounded-xl border border-slate-800">
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-4">
+                    <img src="https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&q=80&w=400" alt="Serah terima unit" class="w-full h-48 object-cover rounded-lg border border-slate-800">
                     <div class="flex text-brand-accent text-xs">★★★★★</div>
-                    <p class="text-xs text-slate-300 italic leading-relaxed">"Nego harga Xpander dengan Bayu sangat profesional dan transparan. Kondisi bodi orisinil, mesin halus seperti yang dijanjikan di iklan media sosial."</p>
-                    <div class="border-t border-slate-800/80 pt-4 flex items-center justify-between">
-                        <div>
-                            <h4 class="font-bold text-xs text-white uppercase tracking-wide">Surya Darma</h4>
-                            <p class="text-[10px] text-slate-400 mt-0.5">Mitsubishi Xpander (Binjai)</p>
-                        </div>
+                    <p class="text-xs text-slate-300 italic">"Nego harga Xpander dengan Bayu sangat profesional dan transparan. Kondisi bodi orisinil, mesin halus seperti yang dijanjikan di iklan media sosial."</p>
+                    <div class="border-t border-slate-800 pt-3">
+                        <h4 class="font-bold text-xs text-white">Surya Darma</h4>
+                        <p class="text-[10px] text-brand-accent">Mitsubishi Xpander (Binjai)</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Instagram Grid Feed Section -->
-    <section class="py-24 max-w-6xl mx-auto px-4 w-full">
-        <div class="text-center max-w-md mx-auto mb-16 space-y-2">
-            <span class="text-brand-accent font-bold text-xs uppercase tracking-[0.2em]">Instagram Feed</span>
-            <h3 class="text-3xl font-extrabold text-slate-900">@mobilsecondmedan</h3>
-            <p class="text-xs text-slate-500">Ikuti aktivitas harian showroom dan pembaruan unit siap jalan.</p>
-        </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- IG Card 1 -->
-            <a href="https://www.instagram.com/mobilsecondmedan/" target="_blank" class="group relative block overflow-hidden rounded-xl bg-slate-100 aspect-square border border-slate-200/50">
-                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&q=80&w=300" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="text-white text-xs font-bold border border-white/20 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">Lihat Feed</span>
-                </div>
-            </a>
-            <!-- IG Card 2 -->
-            <a href="https://www.instagram.com/mobilsecondmedan/" target="_blank" class="group relative block overflow-hidden rounded-xl bg-slate-100 aspect-square border border-slate-200/50">
-                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=300" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="text-white text-xs font-bold border border-white/20 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">Lihat Feed</span>
-                </div>
-            </a>
-            <!-- IG Card 3 -->
-            <a href="https://www.instagram.com/mobilsecondmedan/" target="_blank" class="group relative block overflow-hidden rounded-xl bg-slate-100 aspect-square border border-slate-200/50">
-                <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=300" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="text-white text-xs font-bold border border-white/20 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">Lihat Feed</span>
-                </div>
-            </a>
-            <!-- IG Card 4 -->
-            <a href="https://www.instagram.com/mobilsecondmedan/" target="_blank" class="group relative block overflow-hidden rounded-xl bg-slate-100 aspect-square border border-slate-200/50">
-                <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=300" alt="Instagram Post" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span class="text-white text-xs font-bold border border-white/20 bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">Lihat Feed</span>
-                </div>
-            </a>
         </div>
     </section>
 
     <!-- Google Maps & Showroom Info Section -->
-    <section id="lokasi" class="py-24 bg-slate-100 border-t border-slate-200/60">
-        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div class="space-y-8">
-                <span class="text-brand-accent font-bold text-xs uppercase tracking-[0.25em]">Showroom Fisik</span>
-                <h3 class="text-3xl font-extrabold text-slate-900 tracking-tight">Kunjungi Lokasi Showroom Kami</h3>
+    <section id="lokasi" class="py-20 bg-slate-100 border-t border-slate-200/60">
+        <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="text-slate-500 font-bold text-xs uppercase tracking-wider">Kunjungi Kami</span>
+                <h3 class="text-3xl font-extrabold text-slate-900">Showroom Cangkir Medan</h3>
                 <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
-                    Tertarik dengan unit kami? Silakan berkunjung ke showroom fisik untuk melakukan inspeksi langsung, test drive, atau diskusi skema pembayaran. Showroom kami terletak strategis di daerah Medan Petisah.
+                    Tertarik dengan unit kami? Silakan berkunjung ke showroom fisik untuk melakukan inspeksi langsung, test drive, atau diskusi skema pembayaran.
                 </p>
-                <div class="space-y-5 text-xs text-slate-700">
-                    <div class="flex items-start gap-4">
-                        <span class="w-5 h-5 text-brand-accent shrink-0 mt-0.5">
+                <div class="space-y-4 text-xs text-slate-700">
+                    <div class="flex items-start gap-3">
+                        <span class="w-5 h-5 text-slate-500 shrink-0 mt-0.5">
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </span>
-                        <span>
-                            <strong class="text-slate-800 uppercase tracking-wide">Mobil Second Medan (CANGKIR)</strong><br>
-                            <span class="text-slate-500 mt-1 block">Jl. Cangkir No.24, Sei Putih Tengah, Kec. Medan Petisah, Kota Medan, Sumatera Utara 20113</span>
-                        </span>
+                        <span><strong>Showroom Cangkir Medan</strong><br>Jl. Cangkir No.24, Sei Putih Tengah, Kec. Medan Petisah, Kota Medan, Sumatera Utara 20113</span>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <span class="w-5 h-5 text-brand-accent shrink-0">
+                    <div class="flex items-center gap-3">
+                        <span class="w-5 h-5 text-slate-500 shrink-0">
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </span>
-                        <span class="text-slate-600">Senin - Sabtu (09.00 - 18.00 WIB) | Minggu (Janji Temu)</span>
+                        <span>Senin - Sabtu (09.00 - 18.00 WIB) | Minggu (Janji Temu)</span>
                     </div>
                 </div>
             </div>
             
-            <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200/50 h-80 relative">
+            <div class="rounded-xl overflow-hidden shadow-md border border-slate-200/50 h-80 relative">
                 <!-- Google Maps Embed -->
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.996160105315!2d98.6534241!3d3.588383399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30312f8623eb64f3%3A0xc47b94916a24687b!2sJl.%20Cangkir%20No.24%2C%20Sei%20Putih%20Tengah%2C%20Kec.%20Medan%20Petisah%2C%20Kota%20Medan%2C%20Sumatera%20Utara%2020113!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
                         class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -263,15 +317,25 @@
     <!-- Footer Container (Rendered by js/app.js) -->
     <div id="footer-container"></div>
 
-    <!-- DB Adaptor & Scripts -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script>
     <script src="js/app.js"></script>
     
     <script>
-        // Render Header & Footer
         renderHeader("home");
         renderFooter();
+
+        // Hero Search handler
+        function executeHeroSearch(e) {
+            e.preventDefault();
+            const search = document.getElementById("hero-search-input").value.trim();
+            const price = document.getElementById("hero-search-price").value;
+            const trans = document.querySelector('input[name="hero-search-trans"]:checked').value;
+            
+            // Redirect to catalog page with queries
+            window.location.href = `katalog.html?search=${encodeURIComponent(search)}&price=${price}&trans=${trans}`;
+        }
 
         // Load data mobil untuk latest list
         async function loadLatestCars() {
@@ -288,15 +352,15 @@
                 }
                 
                 grid.innerHTML = latestCars.map(car => {
-                    let statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-success text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-2">
+                    let statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-success text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-1.5">
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-success pulse-badge"></span> TERSEDIA
                     </span>`;
                     if (car.status === "Booking") {
-                        statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-warning text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-2">
+                        statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-warning text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-1.5">
                             <span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> BOOKING
                         </span>`;
                     } else if (car.status === "Terjual") {
-                        statusBadge = `<span class="absolute top-4 left-4 bg-[#080C16]/90 backdrop-blur-md text-white/90 text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-800 flex items-center gap-2">
+                        statusBadge = `<span class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md text-white/90 text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-800 flex items-center gap-1.5">
                             <span class="w-1.5 h-1.5 rounded-full bg-brand-danger"></span> TERJUAL
                         </span>`;
                     }
@@ -309,31 +373,49 @@
                             <img src="${mainImage}" alt="${car.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                             ${statusBadge}
                         </div>
-                        <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                             <div>
-                                <div class="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">
-                                    <span>Tahun ${car.year}</span>
-                                    <span>&bull;</span>
-                                    <span>${car.transmission}</span>
-                                    <span>&bull;</span>
-                                    <span>${car.fuel_type}</span>
+                                <!-- Caroline checklist tags -->
+                                <div class="flex flex-wrap gap-1.5 mb-2.5">
+                                    <span class="checklist-badge">
+                                        ✓ Lolos 175 Titik Cek
+                                    </span>
+                                    <span class="bg-blue-50 text-blue-700 border border-blue-100 rounded text-[9px] font-bold px-2 py-0.5">
+                                        Garansi 1 Tahun
+                                    </span>
                                 </div>
-                                <h4 class="font-extrabold text-slate-800 text-lg group-hover:text-brand-accent transition-colors truncate">
+
+                                <h4 class="font-extrabold text-slate-800 text-sm group-hover:text-amber-500 transition-colors truncate">
                                     <a href="detail.html?id=${car.id}">${car.title}</a>
                                 </h4>
-                                <div class="text-brand-accent font-black text-xl mt-2 tracking-tight">
+                                <div class="text-brand-primary font-black text-lg mt-1 tracking-tight">
                                     ${formatRupiah(car.price)}
                                 </div>
-                                <div class="flex justify-between items-center text-xs text-slate-500 border-t border-slate-100 pt-3 mt-4">
-                                    <span>Odometer: <strong class="text-slate-800">${car.mileage.toLocaleString('id-ID')} km</strong></span>
-                                    <span class="font-semibold text-slate-600 text-[10px] uppercase tracking-wider">Showroom Cangkir</span>
+                                <div class="text-amber-600 font-bold text-[10px] mt-1.5 flex items-center gap-1 bg-amber-50 border border-amber-100 rounded px-2 py-1 w-fit">
+                                    <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>${formatInstallment(car.price)}</span>
+                                </div>
+                                
+                                <div class="grid grid-cols-3 gap-2 border-t border-slate-100 pt-3 mt-4 text-[10px] text-slate-500 font-semibold">
+                                    <div class="flex items-center gap-1">
+                                        <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        <span>${car.year}</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 005 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
+                                        <span class="truncate" title="${car.transmission}">${car.transmission}</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A2 2 0 013 15.492V4.708a2 2 0 011.553-1.954l6-1.5a2 2 0 011.788.486L18 6.666l5.447-1.816A2 2 0 0126 6.708v10.784a2 2 0 01-1.553 1.954l-6 1.5a2 2 0 01-1.788-.486L9 16.666v3.334z"></path></svg>
+                                        <span class="truncate" title="${car.mileage.toLocaleString('id-ID')} km">${(car.mileage/1000).toFixed(0)}k km</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2 gap-3 pt-2">
-                                <a href="detail.html?id=${car.id}" class="bg-[#080C16] text-white text-center font-bold text-xs py-3 rounded-lg hover:bg-slate-800 transition-colors uppercase tracking-wider">
-                                    Detail Unit
+                                <a href="detail.html?id=${car.id}" class="bg-[#0f172a] text-white text-center font-bold text-[10px] py-3 rounded-lg hover:bg-slate-800 transition-colors uppercase tracking-wider">
+                                    Detail
                                 </a>
-                                <button onclick="CompareManager.add('${car.id}', '${car.title}', ${car.price}, '${mainImage}')" class="border border-slate-300 text-slate-700 text-center font-bold text-xs py-3 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition-colors uppercase tracking-wider">
+                                <button onclick="CompareManager.add('${car.id}', '${car.title}', ${car.price}, '${mainImage}')" class="border border-slate-300 text-slate-700 text-center font-bold text-[10px] py-3 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition-colors uppercase tracking-wider">
                                     ⚖️ Bandingkan
                                 </button>
                             </div>
@@ -343,7 +425,7 @@
                 }).join('');
             } catch (err) {
                 console.error("Gagal memuat katalog", err);
-                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-brand-danger text-xs font-semibold">Gagal memuat data mobil. Silakan periksa koneksi.</div>`;
+                grid.innerHTML = `<div class="col-span-3 text-center py-12 text-brand-danger text-xs font-semibold">Gagal memuat data. Periksa koneksi database Anda.</div>`;
             }
         }
         

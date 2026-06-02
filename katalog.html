@@ -12,8 +12,9 @@
                 extend: {
                     colors: {
                         brand: {
-                            primary: '#080C16',
-                            accent: '#D4AF37',
+                            primary: '#0F172A',
+                            accent: '#FFC800',
+                            accentHover: '#E6B400',
                             success: '#10B981',
                             warning: '#F59E0B',
                             danger: '#EF4444',
@@ -34,20 +35,20 @@
     <!-- Catalog Main Section -->
     <main class="flex-1 max-w-6xl mx-auto px-4 py-16 w-full font-sans">
         <div class="mb-12 space-y-2">
-            <span class="text-brand-accent font-bold text-xs uppercase tracking-[0.2em]">Temukan Unit Terbaik</span>
+            <span class="text-brand-primary font-bold text-xs uppercase tracking-[0.2em]">Temukan Unit Terbaik</span>
             <h2 class="text-3xl font-extrabold tracking-tight text-slate-900">Katalog Unit Showroom</h2>
             <p class="text-slate-500 text-xs md:text-sm">Gunakan panel filter untuk menyaring daftar stok mobil sesuai kriteria Anda.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <!-- Sidebar Filter Panel -->
-            <aside class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm space-y-6 h-fit lg:sticky lg:top-24">
+            <aside class="bg-white border border-slate-200/60 p-6 rounded-xl shadow-sm space-y-6 h-fit lg:sticky lg:top-24">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                     <h3 class="font-bold text-slate-800 flex items-center gap-2 text-xs uppercase tracking-wider">
-                        <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                        <svg class="w-4 h-4 text-brand-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
                         Filter Unit
                     </h3>
-                    <button onclick="resetFilters()" class="text-xs text-slate-400 hover:text-brand-accent font-bold transition-colors">Reset</button>
+                    <button onclick="resetFilters()" class="text-xs text-slate-400 hover:text-brand-primary font-bold transition-colors">Reset</button>
                 </div>
 
                 <!-- Merek & Model Search -->
@@ -63,7 +64,7 @@
                     <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Harga Maksimal</label>
                     <div class="flex items-center justify-between text-xs font-semibold">
                         <span class="text-slate-400">50 Jt</span>
-                        <span id="price-val" class="font-extrabold text-brand-accent text-sm">500 Jt</span>
+                        <span id="price-val" class="font-extrabold text-brand-primary text-sm">500 Jt</span>
                     </div>
                     <input type="range" id="price-input" min="50" max="1000" value="500" 
                            class="w-full" oninput="updatePriceValue(this.value)">
@@ -82,13 +83,13 @@
                     <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Transmisi</label>
                     <div class="flex flex-col gap-2 text-xs">
                         <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
-                            <input type="radio" name="transmisi-input" value="all" checked onchange="applyFilters()" class="accent-brand-accent"> Semua
+                            <input type="radio" name="transmisi-input" value="all" checked onchange="applyFilters()" class="accent-brand-primary"> Semua
                         </label>
                         <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
-                            <input type="radio" name="transmisi-input" value="Manual" onchange="applyFilters()" class="accent-brand-accent"> Manual
+                            <input type="radio" name="transmisi-input" value="Manual" onchange="applyFilters()" class="accent-brand-primary"> Manual
                         </label>
                         <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
-                            <input type="radio" name="transmisi-input" value="Matik" onchange="applyFilters()" class="accent-brand-accent"> Matik (Automatic)
+                            <input type="radio" name="transmisi-input" value="Matik" onchange="applyFilters()" class="accent-brand-primary"> Matik
                         </label>
                     </div>
                 </div>
@@ -98,13 +99,13 @@
                     <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Bahan Bakar</label>
                     <div class="flex flex-col gap-2 text-xs">
                         <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
-                            <input type="radio" name="fuel-input" value="all" checked onchange="applyFilters()" class="accent-brand-accent"> Semua
+                            <input type="radio" name="fuel-input" value="all" checked onchange="applyFilters()" class="accent-brand-primary"> Semua
                         </label>
                         <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
-                            <input type="radio" name="fuel-input" value="Bensin" onchange="applyFilters()" class="accent-brand-accent"> Bensin
+                            <input type="radio" name="fuel-input" value="Bensin" onchange="applyFilters()" class="accent-brand-primary"> Bensin
                         </label>
                         <label class="flex items-center gap-2 text-slate-600 font-medium cursor-pointer">
-                            <input type="radio" name="fuel-input" value="Diesel" onchange="applyFilters()" class="accent-brand-accent"> Diesel
+                            <input type="radio" name="fuel-input" value="Diesel" onchange="applyFilters()" class="accent-brand-primary"> Diesel
                         </label>
                     </div>
                 </div>
@@ -114,7 +115,7 @@
                     <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Jarak Tempuh Maksimal</label>
                     <div class="flex items-center justify-between text-xs font-semibold">
                         <span class="text-slate-400">5.000 km</span>
-                        <span id="km-val" class="font-extrabold text-brand-accent text-sm">100.000 km</span>
+                        <span id="km-val" class="font-extrabold text-brand-primary text-sm">100.000 km</span>
                     </div>
                     <input type="range" id="km-input" min="5000" max="150000" step="5000" value="100000" 
                            class="w-full" oninput="updateKmValue(this.value)">
@@ -124,13 +125,13 @@
             <!-- Catalog Listings Area -->
             <div class="lg:col-span-3 space-y-6">
                 <!-- Sorting & Top Bar -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-white border border-slate-200/60 px-6 py-4 rounded-2xl shadow-sm gap-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-white border border-slate-200/60 px-6 py-4 rounded-xl shadow-sm gap-4">
                     <div class="text-xs text-slate-500 font-bold uppercase tracking-wider">
                         Menampilkan <span id="cars-count" class="font-black text-slate-800 text-sm">0</span> Unit Pilihan
                     </div>
                     <div class="flex items-center gap-2">
                         <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0">Urutan:</label>
-                        <select id="sort-select" class="bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold px-3 py-2 focus:outline-none focus:border-brand-accent cursor-pointer"
+                        <select id="sort-select" class="bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold px-3 py-2 focus:outline-none focus:border-brand-primary cursor-pointer"
                                 onchange="applyFilters()">
                             <option value="rekomendasi">Rekomendasi</option>
                             <option value="harga-asc">Harga Terendah</option>
@@ -152,7 +153,7 @@
     <!-- Footer Container (Rendered by js/app.js) -->
     <div id="footer-container"></div>
 
-    <!-- Supabase JS Client & Global Scripts -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script>
     <script src="js/app.js"></script>
@@ -166,10 +167,34 @@
         async function loadCatalog() {
             try {
                 allCars = await DB.getCars();
+                parseUrlParams();
                 applyFilters();
             } catch (err) {
                 console.error("Gagal mengambil data katalog", err);
                 document.getElementById("cars-grid").innerHTML = `<div class="col-span-2 text-center py-12 text-brand-danger text-xs font-semibold">Gagal memuat katalog. Coba periksa koneksi database.</div>`;
+            }
+        }
+
+        // Parse query params from index hero or brand grid
+        function parseUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const searchVal = params.get('search');
+            const brandVal = params.get('brand');
+            const priceVal = params.get('price');
+            const transVal = params.get('trans');
+            
+            if (searchVal) {
+                document.getElementById("search-input").value = searchVal;
+            } else if (brandVal) {
+                document.getElementById("search-input").value = brandVal;
+            }
+            if (priceVal) {
+                document.getElementById("price-input").value = priceVal;
+                document.getElementById("price-val").innerText = priceVal === "1000" ? "Semua Harga" : `${priceVal} Jt`;
+            }
+            if (transVal && transVal !== 'all') {
+                const radio = document.querySelector(`input[name="transmisi-input"][value="${transVal}"]`);
+                if (radio) radio.checked = true;
             }
         }
 
@@ -196,6 +221,9 @@
             // Reset Radios
             document.querySelector('input[name="transmisi-input"][value="all"]').checked = true;
             document.querySelector('input[name="fuel-input"][value="all"]').checked = true;
+            
+            // Clean URL query state
+            window.history.replaceState({}, document.title, window.location.pathname);
             
             applyFilters();
         }
@@ -253,22 +281,22 @@
 
             if (cars.length === 0) {
                 grid.innerHTML = `
-                <div class="col-span-2 text-center py-16 bg-white border border-slate-200/60 rounded-2xl">
+                <div class="col-span-2 text-center py-16 bg-white border border-slate-200/60 rounded-xl">
                     <p class="text-slate-400 text-xs font-semibold">Tidak ada unit mobil yang sesuai dengan kriteria filter Anda.</p>
                 </div>`;
                 return;
             }
 
             grid.innerHTML = cars.map(car => {
-                let statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-success text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-2">
+                let statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-success text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-brand-success pulse-badge"></span> TERSEDIA
                 </span>`;
                 if (car.status === "Booking") {
-                    statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-warning text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-2">
+                    statusBadge = `<span class="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-brand-warning text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-100 flex items-center gap-1.5">
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-warning"></span> BOOKING
                     </span>`;
                 } else if (car.status === "Terjual") {
-                    statusBadge = `<span class="absolute top-4 left-4 bg-[#080C16]/90 backdrop-blur-md text-white/90 text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-800 flex items-center gap-2">
+                    statusBadge = `<span class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md text-white/90 text-[10px] px-3 py-1.5 rounded-lg font-black shadow-md border border-slate-800 flex items-center gap-1.5">
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-danger"></span> TERJUAL
                     </span>`;
                 }
@@ -281,31 +309,49 @@
                         <img src="${mainImage}" alt="${car.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
                         ${statusBadge}
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                         <div>
-                            <div class="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">
-                                <span>Tahun ${car.year}</span>
-                                <span>&bull;</span>
-                                <span>${car.transmission}</span>
-                                <span>&bull;</span>
-                                <span>${car.fuel_type}</span>
+                            <!-- Checklist tags -->
+                            <div class="flex flex-wrap gap-1.5 mb-2.5">
+                                <span class="checklist-badge">
+                                    ✓ Lolos 175 Titik Cek
+                                </span>
+                                <span class="bg-blue-50 text-blue-700 border border-blue-100 rounded text-[9px] font-bold px-2 py-0.5">
+                                    Garansi 1 Tahun
+                                </span>
                             </div>
-                            <h4 class="font-extrabold text-slate-800 text-lg group-hover:text-brand-accent transition-colors truncate">
+
+                            <h4 class="font-extrabold text-slate-800 text-sm group-hover:text-amber-500 transition-colors truncate">
                                 <a href="detail.html?id=${car.id}">${car.title}</a>
                             </h4>
-                            <div class="text-brand-accent font-black text-xl mt-2 tracking-tight">
+                            <div class="text-brand-primary font-black text-lg mt-1 tracking-tight">
                                 ${formatRupiah(car.price)}
                             </div>
-                            <div class="flex justify-between items-center text-xs text-slate-500 border-t border-slate-100 pt-3 mt-4">
-                                <span>Odometer: <strong class="text-slate-800">${car.mileage.toLocaleString('id-ID')} km</strong></span>
-                                <span class="font-semibold text-slate-600 text-[10px] uppercase tracking-wider">Showroom Cangkir</span>
+                            <div class="text-amber-600 font-bold text-[10px] mt-1.5 flex items-center gap-1 bg-amber-50 border border-amber-100 rounded px-2 py-1 w-fit">
+                                <svg class="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span>${formatInstallment(car.price)}</span>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-2 border-t border-slate-100 pt-3 mt-4 text-[10px] text-slate-500 font-semibold">
+                                <div class="flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span>${car.year}</span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 005 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
+                                    <span class="truncate" title="${car.transmission}">${car.transmission}</span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A2 2 0 013 15.492V4.708a2 2 0 011.553-1.954l6-1.5a2 2 0 011.788.486L18 6.666l5.447-1.816A2 2 0 0126 6.708v10.784a2 2 0 01-1.553 1.954l-6 1.5a2 2 0 01-1.788-.486L9 16.666v3.334z"></path></svg>
+                                    <span class="truncate" title="${car.mileage.toLocaleString('id-ID')} km">${(car.mileage/1000).toFixed(0)}k km</span>
+                                </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-3 pt-2">
-                            <a href="detail.html?id=${car.id}" class="bg-[#080C16] text-white text-center font-bold text-xs py-3 rounded-lg hover:bg-slate-800 transition-colors uppercase tracking-wider">
-                                Detail Unit
+                            <a href="detail.html?id=${car.id}" class="bg-[#0f172a] text-white text-center font-bold text-[10px] py-3 rounded-lg hover:bg-slate-800 transition-colors uppercase tracking-wider">
+                                Detail
                             </a>
-                            <button onclick="CompareManager.add('${car.id}', '${car.title}', ${car.price}, '${mainImage}')" class="border border-slate-300 text-slate-700 text-center font-bold text-xs py-3 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition-colors uppercase tracking-wider">
+                            <button onclick="CompareManager.add('${car.id}', '${car.title}', ${car.price}, '${mainImage}')" class="border border-slate-300 text-slate-700 text-center font-bold text-[10px] py-3 rounded-lg hover:bg-slate-100 hover:text-slate-900 transition-colors uppercase tracking-wider">
                                 ⚖️ Bandingkan
                             </button>
                         </div>

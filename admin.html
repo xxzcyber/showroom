@@ -13,7 +13,8 @@
                     colors: {
                         brand: {
                             primary: '#080C16',
-                            accent: '#D4AF37',
+                            accent: '#FFC800',
+                            accentHover: '#E6B400',
                             success: '#10B981',
                             warning: '#F59E0B',
                             danger: '#EF4444',
@@ -33,11 +34,11 @@
 
     <!-- Login Area (Hidden if logged in) -->
     <div id="login-container" class="flex-1 flex items-center justify-center p-4 py-24 font-sans">
-        <div class="bg-white border border-slate-200/60 p-8 rounded-2xl shadow-xl w-full max-w-sm space-y-6">
+        <div class="bg-white border border-slate-200/60 p-8 rounded-xl shadow-md w-full max-w-sm space-y-6">
             <div class="text-center space-y-2">
-                <div class="w-12 h-12 bg-slate-950 text-brand-accent rounded-full flex items-center justify-center font-bold text-xl mx-auto border-2 border-brand-accent/20">M</div>
-                <h3 class="text-lg font-extrabold text-slate-800">Login Administrator</h3>
-                <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Showroom Cangkir Medan</p>
+                <div class="w-12 h-12 bg-slate-950 text-brand-accent rounded-full flex items-center justify-center font-bold text-xl mx-auto">M</div>
+                <h3 class="text-lg font-bold text-slate-800">Login Administrator</h3>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Showroom Cangkir Medan</p>
             </div>
             
             <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
@@ -51,7 +52,7 @@
                     <input type="password" id="login-password" required placeholder=""
                            class="premium-input text-xs font-semibold">
                 </div>
-                <button type="submit" class="premium-btn-primary w-full py-3.5 text-xs tracking-wider uppercase">
+                <button type="submit" class="premium-btn-primary w-full py-3 text-xs tracking-wider uppercase">
                     Masuk Dashboard
                 </button>
             </form>
@@ -61,24 +62,24 @@
     <!-- Dashboard Area (Hidden if not logged in) -->
     <div id="dashboard-container" class="flex-1 max-w-6xl mx-auto px-4 py-12 w-full hidden font-sans space-y-8 animate-fade-in">
         <!-- Dashboard Top Header Bar -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm gap-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between bg-white border border-slate-200/60 p-6 rounded-xl shadow-sm gap-4">
             <div class="space-y-1.5">
-                <h2 class="text-xl font-extrabold text-slate-800">Dashboard Control Panel</h2>
+                <h2 class="text-xl font-bold text-slate-800">Dashboard Control Panel</h2>
                 <div class="flex flex-wrap items-center gap-3 text-xs">
                     <span class="text-slate-500">Akun: <strong class="text-slate-700">ko@mobil.com</strong></span>
                     <span class="text-slate-300">|</span>
                     <!-- DB Mode Badge -->
-                    <span id="db-mode-badge" class="bg-brand-accent/15 text-slate-700 px-2.5 py-0.5 rounded font-extrabold text-[10px] border border-brand-accent/20">
+                    <span id="db-mode-badge" class="bg-brand-accent/20 text-slate-800 px-2.5 py-0.5 rounded font-bold text-[10px]">
                         Memuat Status Database...
                     </span>
                 </div>
             </div>
             
             <div class="flex flex-wrap gap-2.5">
-                <button onclick="openConfigModal()" class="border border-slate-200 text-slate-700 bg-white font-bold text-[10px] tracking-wider uppercase px-4 py-2.5 rounded-xl hover:bg-slate-50 transition-colors">
-                    ⚙️ Atur Supabase
+                <button onclick="openConfigModal()" class="border border-slate-200 text-slate-700 bg-white font-bold text-[10px] tracking-wider uppercase px-4 py-2.5 rounded-lg hover:bg-slate-50 transition-colors">
+                    ⚙️ Hubungkan Cloud Database
                 </button>
-                <button onclick="handleLogout()" class="border border-red-100 text-red-500 bg-red-50/50 font-bold text-[10px] tracking-wider uppercase px-4 py-2.5 rounded-xl hover:bg-red-100 hover:text-red-700 transition-colors">
+                <button onclick="handleLogout()" class="border border-red-100 text-red-500 bg-red-50/50 font-bold text-[10px] tracking-wider uppercase px-4 py-2.5 rounded-lg hover:bg-red-100 hover:text-red-700 transition-colors">
                     Keluar / Log Out
                 </button>
             </div>
@@ -86,7 +87,7 @@
 
         <!-- Dashboard Nav Tabs -->
         <div class="flex border-b border-slate-200 text-xs font-bold uppercase tracking-wider gap-8">
-            <button onclick="switchTab('cars')" id="tab-btn-cars" class="pb-3 border-b-2 border-brand-accent text-slate-900">
+            <button onclick="switchTab('cars')" id="tab-btn-cars" class="pb-3 border-b-2 border-brand-primary text-slate-900">
                 🚗 Stok Mobil
             </button>
             <button onclick="switchTab('comments')" id="tab-btn-comments" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-600">
@@ -100,13 +101,13 @@
         <!-- TAB 1: KELOLA STOK MOBIL -->
         <div id="tab-content-cars" class="space-y-6">
             <div class="flex items-center justify-between">
-                <h3 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider">Inventaris Unit Showroom</h3>
+                <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Inventaris Unit Showroom</h3>
                 <button onclick="openCarModal('add')" class="premium-btn-primary py-2.5 px-4 text-xs tracking-wider uppercase">
                     + Tambah Mobil Baru
                 </button>
             </div>
 
-            <div class="bg-white border border-slate-200/60 rounded-2xl shadow-sm overflow-x-auto">
+            <div class="bg-white border border-slate-200/60 rounded-xl shadow-sm overflow-x-auto">
                 <table class="w-full text-left border-collapse text-xs font-sans">
                     <thead>
                         <tr class="bg-slate-50 border-b border-slate-200">
@@ -126,9 +127,9 @@
 
         <!-- TAB 2: MODERASI KOMENTAR -->
         <div id="tab-content-comments" class="space-y-6 hidden">
-            <h3 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider">Moderasi Diskusi Publik</h3>
+            <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Moderasi Diskusi Publik</h3>
             
-            <div class="bg-white border border-slate-200/60 rounded-2xl shadow-sm overflow-x-auto">
+            <div class="bg-white border border-slate-200/60 rounded-xl shadow-sm overflow-x-auto">
                 <table class="w-full text-left border-collapse text-xs font-sans">
                     <thead>
                         <tr class="bg-slate-50 border-b border-slate-200">
@@ -147,9 +148,9 @@
 
         <!-- TAB 3: INBOX PESAN PRIVAT -->
         <div id="tab-content-messages" class="space-y-6 hidden">
-            <h3 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider">Inkuiri & Pesan Privat</h3>
+            <h3 class="font-bold text-slate-800 text-sm uppercase tracking-wider">Inkuiri & Pesan Privat</h3>
 
-            <div class="bg-white border border-slate-200/60 rounded-2xl shadow-sm overflow-x-auto">
+            <div class="bg-white border border-slate-200/60 rounded-xl shadow-sm overflow-x-auto">
                 <table class="w-full text-left border-collapse text-xs font-sans">
                     <thead>
                         <tr class="bg-slate-50 border-b border-slate-200">
@@ -169,9 +170,9 @@
 
     <!-- CAR MODAL (Tambah & Edit Mobil) -->
     <div id="car-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden p-4 overflow-y-auto animate-fade-in font-sans">
-        <div class="bg-white border border-slate-200/60 p-6 rounded-2xl max-w-2xl w-full my-8 relative space-y-4 max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div class="bg-white border border-slate-200/60 p-6 rounded-xl max-w-2xl w-full my-8 relative space-y-4 max-h-[90vh] overflow-y-auto shadow-xl">
             <button onclick="closeCarModal()" class="absolute top-4 right-4 text-slate-400 hover:text-black text-xl font-bold">✕</button>
-            <h3 id="car-modal-title" class="font-extrabold text-slate-800 text-sm border-b border-slate-100 pb-3 uppercase tracking-wider">Tambah Unit Mobil</h3>
+            <h3 id="car-modal-title" class="font-bold text-slate-800 text-sm border-b border-slate-100 pb-3 uppercase tracking-wider">Tambah Unit Mobil</h3>
             
             <form id="car-form" class="space-y-4" onsubmit="saveCar(event)">
                 <!-- ID Tersembunyi -->
@@ -234,15 +235,35 @@
                     </div>
                 </div>
 
-                <!-- Input Foto Multi-Angle -->
-                <div class="space-y-1 text-xs font-bold text-slate-500">
-                    <label class="block uppercase tracking-wider text-[10px]">Foto Multi-Angle (URL Gambar, satu per baris - minimal 5-10 baris)</label>
-                    <textarea id="car-form-images" rows="4" required placeholder="Tuliskan URL gambar di sini, satu per baris..."
-                              class="premium-input font-medium text-slate-800 text-xs"></textarea>
+                <!-- Foto Upload / Camera and Preview Section -->
+                <div class="space-y-2 text-xs font-bold text-slate-500 border-t border-slate-100 pt-4">
+                    <label class="block uppercase tracking-wider text-[10px]">Foto Multi-Angle Mobil</label>
+                    <div class="flex flex-wrap gap-2.5">
+                        <!-- Camera / File Attachment Trigger -->
+                        <button type="button" onclick="document.getElementById('car-form-file-input').click()" 
+                                class="border border-slate-300 text-slate-700 bg-white hover:bg-slate-100 font-bold text-xs px-4 py-2.5 rounded-lg flex items-center gap-2 transition-colors">
+                            📷 Unggah Berkas / Akses Kamera HP
+                        </button>
+                        <!-- Hidden input for file picking/camera capturing -->
+                        <input type="file" id="car-form-file-input" accept="image/*" multiple class="hidden" onchange="handleImageUpload(event)">
+                        
+                        <!-- Manual URL input -->
+                        <div class="flex-1 flex gap-2 min-w-[240px]">
+                            <input type="text" id="car-form-url-input" placeholder="Atau tempel URL Gambar langsung..." class="premium-input py-2 text-xs">
+                            <button type="button" onclick="addManualUrl()" class="bg-brand-primary text-white font-bold text-xs px-3 rounded-lg hover:bg-slate-800 transition-colors shrink-0">
+                                Tambah
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Visual preview grid -->
+                    <div id="car-form-image-preview-container" class="grid grid-cols-4 sm:grid-cols-6 gap-3 pt-2">
+                        <!-- Populated dynamically via JS -->
+                    </div>
                 </div>
 
                 <!-- Deskripsi Lengkap -->
-                <div class="space-y-1 text-xs font-bold text-slate-500">
+                <div class="space-y-1 text-xs font-bold text-slate-500 border-t border-slate-100 pt-4">
                     <label class="block uppercase tracking-wider text-[10px]">Deskripsi / Catatan Tambahan</label>
                     <textarea id="car-form-description" rows="3" required placeholder="Tuliskan keunggulan mobil, garansi, kondisi fisik, dsb..."
                               class="premium-input font-medium text-slate-800 text-xs"></textarea>
@@ -260,24 +281,24 @@
         </div>
     </div>
 
-    <!-- CONFIG MODAL (Supabase Setup Panel) -->
+    <!-- CONFIG MODAL (Database Cloud Config Panel) -->
     <div id="config-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center hidden p-4 animate-fade-in font-sans">
-        <div class="bg-white border border-slate-200/60 p-6 rounded-2xl max-w-sm w-full relative space-y-4 shadow-2xl">
+        <div class="bg-white border border-slate-200/60 p-6 rounded-xl max-w-sm w-full relative space-y-4 shadow-xl">
             <button onclick="closeConfigModal()" class="absolute top-4 right-4 text-slate-400 hover:text-black text-xl font-bold">✕</button>
-            <h3 class="font-extrabold text-slate-800 text-sm border-b border-slate-100 pb-3 uppercase tracking-wider">⚙️ Atur Supabase Cloud</h3>
+            <h3 class="font-bold text-slate-800 text-sm border-b border-slate-100 pb-3 uppercase tracking-wider">⚙️ Hubungkan Database Cloud</h3>
             <p class="text-xs text-slate-500 leading-normal">
-                Hubungkan penyimpanan cloud Supabase dengan mengisi Project URL resmi Anda.
+                Sambungkan web dengan memasukkan alamat Endpoint Database Cloud Anda.
             </p>
             
             <div class="space-y-4">
                 <div class="space-y-1 font-bold text-slate-500 text-xs">
-                    <label class="block uppercase tracking-wider text-[10px]">Supabase Project URL</label>
-                    <input type="text" id="config-url" placeholder="https://xxxxxxxxxxxxxxxxxxxx.supabase.co" 
+                    <label class="block uppercase tracking-wider text-[10px]">Endpoint URL</label>
+                    <input type="text" id="config-url" placeholder="https://xxxxxxxxxxxxxxxxxxxx.co" 
                            class="premium-input text-xs font-semibold text-slate-800">
                 </div>
                 <div class="text-[9px] text-slate-400 font-semibold space-y-1.5">
-                    <p>• Dapatkan Project URL Anda di dashboard Supabase (Settings &gt; API &gt; Project URL).</p>
-                    <p>• Publishable Key & Secret Key sudah terkonfigurasi secara bawaan.</p>
+                    <p>• Dapatkan Endpoint URL di panel dashboard Database Cloud Anda.</p>
+                    <p>• Kunci akses keamanan (*API Keys*) sudah terkonfigurasi secara bawaan di skrip.</p>
                 </div>
                 <div class="flex gap-2 pt-2">
                     <button onclick="saveSupabaseConfig()" class="flex-1 bg-[#080C16] text-white font-bold text-xs py-2.5 rounded-lg hover:bg-slate-800 transition-colors">
@@ -302,6 +323,8 @@
     <script>
         renderHeader("admin");
         renderFooter();
+
+        let uploadedImages = []; // List to store uploaded / defined images
 
         // Cek autentikasi awal
         function checkAuth() {
@@ -345,7 +368,7 @@
             checkAuth();
         }
 
-        // Atur Supabase Cloud Config Panel
+        // Atur Database Cloud Config Panel
         function openConfigModal() {
             document.getElementById("config-url").value = SUPABASE_URL.includes("your-project-ref") ? "" : SUPABASE_URL;
             document.getElementById("config-modal").classList.remove("hidden");
@@ -358,7 +381,7 @@
         function saveSupabaseConfig() {
             const url = document.getElementById("config-url").value.trim();
             if (!url) {
-                alert("Project URL tidak boleh kosong!");
+                alert("Endpoint URL tidak boleh kosong!");
                 return;
             }
             DB.setSupabaseUrl(url);
@@ -375,7 +398,7 @@
                 const btn = document.getElementById(`tab-btn-${t}`);
                 const content = document.getElementById(`tab-content-${t}`);
                 if (t === tabName) {
-                    btn.className = "pb-3 border-b-2 border-brand-accent text-slate-900 font-bold";
+                    btn.className = "pb-3 border-b-2 border-brand-primary text-slate-900 font-bold";
                     content.classList.remove("hidden");
                 } else {
                     btn.className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-600 font-bold";
@@ -442,6 +465,86 @@
             }
         }
 
+        // Handle File Upload and Compress Image to Base64
+        function handleImageUpload(e) {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        // Canvas compressor helper
+                        const canvas = document.createElement("canvas");
+                        let width = img.width;
+                        let height = img.height;
+                        const max_size = 800; // max size in px
+
+                        if (width > height) {
+                            if (width > max_size) {
+                                height *= max_size / width;
+                                width = max_size;
+                            }
+                        } else {
+                            if (height > max_size) {
+                                width *= max_size / height;
+                                height = max_size;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Compress to JPEG with 0.7 quality
+                        const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
+                        uploadedImages.push(compressedBase64);
+                        renderImagePreviews();
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+            // Reset input file value
+            e.target.value = "";
+        }
+
+        // Add image URL manually
+        function addManualUrl() {
+            const urlInput = document.getElementById("car-form-url-input");
+            const url = urlInput.value.trim();
+            if (!url) return;
+
+            uploadedImages.push(url);
+            urlInput.value = "";
+            renderImagePreviews();
+        }
+
+        // Remove photo thumbnail
+        function removeImage(idx) {
+            uploadedImages.splice(idx, 1);
+            renderImagePreviews();
+        }
+
+        // Render photo previews inside the modal
+        function renderImagePreviews() {
+            const previewContainer = document.getElementById("car-form-image-preview-container");
+            if (uploadedImages.length === 0) {
+                previewContainer.innerHTML = `<div class="col-span-full text-slate-400 text-[10px] font-semibold italic text-center py-2">Belum ada foto yang diunggah.</div>`;
+                return;
+            }
+
+            previewContainer.innerHTML = uploadedImages.map((img, idx) => `
+                <div class="upload-thumb">
+                    <img src="${img}" class="w-full h-full object-cover">
+                    <span onclick="removeImage(${idx})" class="upload-thumb-delete" title="Hapus">✕</span>
+                </div>
+            `).join('');
+        }
+
         // Modal Mobil Actions
         async function openCarModal(mode, id = null) {
             const form = document.getElementById("car-form");
@@ -450,6 +553,8 @@
             const title = document.getElementById("car-modal-title");
             const formId = document.getElementById("car-form-id");
 
+            uploadedImages = []; // Reset list
+
             if (mode === "add") {
                 title.innerText = "Tambah Unit Mobil Baru";
                 formId.value = "";
@@ -457,7 +562,7 @@
                 document.getElementById("car-form-trans").value = "Matik";
                 document.getElementById("car-form-fuel").value = "Bensin";
                 document.getElementById("car-form-capacity").value = "7";
-                document.getElementById("car-form-images").value = "";
+                renderImagePreviews();
             } else if (mode === "edit" && id) {
                 title.innerText = "Edit Data Unit Mobil";
                 formId.value = id;
@@ -476,7 +581,10 @@
                         document.getElementById("car-form-capacity").value = car.passenger_capacity || 7;
                         document.getElementById("car-form-color").value = car.color || "";
                         document.getElementById("car-form-tax").value = car.tax_expiration || "";
-                        document.getElementById("car-form-images").value = car.images ? car.images.join('\n') : "";
+                        
+                        uploadedImages = car.images ? [...car.images] : [];
+                        renderImagePreviews();
+
                         document.getElementById("car-form-description").value = car.description;
                     }
                 } catch (err) {
@@ -496,12 +604,8 @@
             e.preventDefault();
             const id = document.getElementById("car-form-id").value;
 
-            // Parsing URL Gambar (Satu per baris)
-            const imagesRaw = document.getElementById("car-form-images").value;
-            const images = imagesRaw.split('\n').map(line => line.trim()).filter(line => line.length > 0);
-
-            if (images.length === 0) {
-                alert("Harap masukkan minimal 1 URL gambar mobil!");
+            if (uploadedImages.length === 0) {
+                alert("Harap masukkan minimal 1 foto mobil!");
                 return;
             }
 
@@ -517,7 +621,7 @@
                 passenger_capacity: Number(document.getElementById("car-form-capacity").value) || 7,
                 color: document.getElementById("car-form-color").value,
                 tax_expiration: document.getElementById("car-form-tax").value,
-                images: images,
+                images: uploadedImages,
                 description: document.getElementById("car-form-description").value
             };
 
@@ -538,7 +642,7 @@
 
         // Hapus Mobil
         async function deleteCar(id) {
-            if (confirm("Apakah Anda yakin ingin menghapus mobil ini secara permanen dari basis data?")) {
+            if (confirm("Apakah Anda yakin ingin menghapus mobil ini secara permanen?")) {
                 try {
                     await DB.deleteCar(id);
                     alert("Mobil berhasil dihapus!");
